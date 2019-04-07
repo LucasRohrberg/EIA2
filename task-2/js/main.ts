@@ -25,12 +25,11 @@ function getCardAmount(): number {
     return cardAmount;
 }
 
-function dealCards(_handCardsTotal: number) {
+function dealCards(_handCardsTotal: number) { 
     let newCard: string = "";
     for (let i = 0; i < _handCardsTotal; i++) {
         let randomCard: number = Math.floor(Math.random() * Deck.length);
         handCards.push(Deck[randomCard]);
-        console.log(handCards[i]);
         newCard += `<div class="${handCards[i].type}">${handCards[i].score} of ${handCards[i].type}</div>`;
         Deck.splice(randomCard, 1);
     }
