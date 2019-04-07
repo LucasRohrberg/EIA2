@@ -1,3 +1,12 @@
+/*
+Aufgabe: <2 - Mau Mau>
+Name: <Lucas Rohrberg>
+Matrikel: <260241>
+Datum: <7. April 2019, 12:39Uhr>
+	
+Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
+*/
+
 interface Card {
     type: string;
     score: string;
@@ -22,7 +31,7 @@ function dealCards(_handCardsTotal: number) {
         let randomCard: number = Math.floor(Math.random() * Deck.length);
         handCards.push(Deck[randomCard]);
         console.log(handCards[i]);
-        newCard += `<div id="i${i}" class="${handCards[i].type}">${handCards[i].score} of ${handCards[i].type}</div>`;
+        newCard += `<div class="${handCards[i].type}">${handCards[i].score} of ${handCards[i].type}</div>`;
         Deck.splice(randomCard, 1);
     }
     document.getElementById("handCards").innerHTML = newCard;
