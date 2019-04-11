@@ -1,8 +1,8 @@
 /*
-Aufgabe: <2 - Mau Mau>
+Aufgabe: <3 - Mau Mau wird interaktiv>
 Name: <Lucas Rohrberg>
 Matrikel: <260241>
-Datum: <7. April 2019, 12:39Uhr>
+Datum: <11. April 2019, 04:08Uhr>
 	
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
