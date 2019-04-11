@@ -71,9 +71,17 @@ document.body.onkeyup = function (pressedKey) {
     }
 };
 function sortCards() {
-    handCards.sort(function (a, b) {
-        return a.order - b.order;
-    });
+    handCards.sort(sortingCommand);
+}
+function sortingCommand(a, b) {
+    let orderA = a.order;
+    let orderB = b.order;
+    if (orderA < orderB)
+        return -1;
+    if (orderA > orderB)
+        return 1;
+    if (orderA == orderB)
+        return 0;
 }
 function sortDisplay() {
     sortCards();

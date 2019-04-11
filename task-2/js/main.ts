@@ -84,10 +84,16 @@ document.body.onkeyup = function(pressedKey){
     }
 }
 
-function sortCards(): void {
-    handCards.sort(function (a, b) {
-        return a.order - b.order;
-    });
+function sortCards() {
+    handCards.sort(sortingCommand);
+}
+
+function sortingCommand(a: Card, b: Card) {
+    let orderA : number = a.order;
+    let orderB : number = b.order;
+    if (orderA < orderB) return -1;
+    if (orderA > orderB) return 1;
+    if (orderA == orderB) return 0;
 }
 
 function sortDisplay(): void {
