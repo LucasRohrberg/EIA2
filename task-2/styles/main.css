@@ -55,18 +55,55 @@ body {
     border-radius: 3%;
 }
 
+#playerArea {
+    display: flex;
+    flex-direction: column;
+}
+
+#playerArea button {
+    padding: 0.5%;
+    width: 100px;
+    align-self: center;
+    background-color: #26bd26;
+    color: #ffffff;
+}
+
+#playerArea button:hover {
+    background-color: #034203;
+}
+
 .hearts  {
     background-color: #ff0000 !important;
 }
 
 .diamonds  {
-    background-color: #b80000 !important;
+    background-color: #a80000 !important;
 }
 
 .spades  {
-    background-color: #000000 !important;
+    background-color: #0f0f0f !important;
 }
 
 .clubs  {
+    background-color: #292929 !important;
+}
+
+.hearts:hover {
+    background-color: #c20000 !important;
+}
+
+.diamonds:hover  {
+    background-color: #770000 !important;
+}
+
+.spades:hover  {
+    background-color: #000000 !important;
+}
+
+.clubs:hover  {
     background-color: #161616 !important;
+}
+
+#deck:hover {
+    background-color: #dddddd;
 }
