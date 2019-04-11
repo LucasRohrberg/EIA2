@@ -15,6 +15,7 @@ interface Card {
 
 document.getElementById("sortCards").addEventListener("click", sortDisplay);
 document.getElementById("deck").addEventListener("click", drawCard);
+window.addEventListener("keydown", checkSpacebar);
 
 let handCards: Card[] = [];
 let playedCards: Card[] = [];
@@ -34,7 +35,7 @@ function getCardAmount(): number {
     return cardAmount;
 }
 
-function dealCards(_handCardsTotal: number) {
+function dealCards(_handCardsTotal: number): void {
     for (let i = 0; i < _handCardsTotal; i++) {
         let randomNumber: number = Math.floor(Math.random() * deck.length);
         handCards.push(deck[randomNumber]);
@@ -78,19 +79,17 @@ function drawCard(): void {
     }
 }
 
-document.body.onkeyup = function(pressedKey){
-    if(pressedKey.keyCode == 32){
-        drawCard();
-    }
+function checkSpacebar(event: KeyboardEvent): void {
+    if (event.keyCode == 32) drawCard();
 }
 
 function sortCards() {
     handCards.sort(sortingCommand);
 }
 
-function sortingCommand(a: Card, b: Card) {
-    let orderA : number = a.order;
-    let orderB : number = b.order;
+function sortingCommand(a: Card, b: Card): number {
+    let orderA: number = a.order;
+    let orderB: number = b.order;
     if (orderA < orderB) return -1;
     if (orderA > orderB) return 1;
     if (orderA == orderB) return 0;
