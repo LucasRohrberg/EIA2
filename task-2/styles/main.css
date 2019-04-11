@@ -17,8 +17,8 @@ body {
 #deck, #playedCards {
     background-color: #ffffff;
     color: black;
-    margin: 1% 1% 0% 1%;
     padding: 2%;
+    margin: 1% 1% 0% 1%;
     text-align: center;
     width: 150px;
     height: 250px;
@@ -37,6 +37,16 @@ body {
     color: white;
     padding: 2%;
     margin: 1% 1% 0% 1%;
+    text-align: center;
+    background-color: #ececec;
+    width: 150px;
+    height: 250px;
+    box-shadow: 3px 3px 10px #1d1d1d;
+    border-radius: 3%;
+}
+
+#playedCards div {
+    color: white;
     text-align: center;
     background-color: #ececec;
     width: 150px;

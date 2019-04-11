@@ -9,7 +9,9 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 document.getElementById("sortCards").addEventListener("click", sortDisplay);
 document.getElementById("deck").addEventListener("click", drawCard);
 let handCards = [];
+let playedCards = [];
 let newCard = "";
+let newestPlayedCard = "";
 let cardAmount;
 let deck = [{ type: "hearts", order: 0, score: "7" }, { type: "hearts", order: 1, score: "8" }, { type: "hearts", order: 2, score: "9" }, { type: "hearts", order: 3, score: "10" }, { type: "hearts", order: 4, score: "jack" }, { type: "hearts", order: 5, score: "queen" }, { type: "hearts", order: 6, score: "king" }, { type: "hearts", order: 7, score: "ace" },
     { type: "diamonds", order: 8, score: "7" }, { type: "diamonds", order: 9, score: "8" }, { type: "diamonds", order: 10, score: "9" }, { type: "diamonds", order: 11, score: "10" }, { type: "diamonds", order: 12, score: "jack" }, { type: "diamonds", order: 13, score: "queen" }, { type: "diamonds", order: 14, score: "king" }, { type: "diamonds", order: 15, score: "ace" },
@@ -33,9 +35,24 @@ function dealCards(_handCardsTotal) {
 function writeHtml(_position) {
     newCard += `<div class="${handCards[_position].type}" id="${handCards[_position].order}">${handCards[_position].score} of ${handCards[_position].type}</div>`;
     document.getElementById("handCards").innerHTML = newCard;
+    document.getElementById("handCards").addEventListener("click", playCard);
     document.getElementById("deck").innerHTML = `deck: ${deck.length} cards left.`;
 }
 function playCard() {
+    let cardID = event.target;
+    for (let i = 0; i < handCards.length; i++) {
+        if (Number(cardID.getAttribute("id")) == handCards[i].order) {
+            playedCards.push(handCards[i]);
+            newestPlayedCard = `<div class="${playedCards[playedCards.length - 1].type}" id="${playedCards[playedCards.length - 1].order}">${playedCards[playedCards.length - 1].score} of ${playedCards[playedCards.length - 1].type}</div>`;
+            document.getElementById("playedCards").innerHTML = newestPlayedCard;
+            handCards.splice(i, 1);
+            document.getElementById("handCards").innerHTML = "";
+            newCard = "";
+            for (let i = 0; i < handCards.length; i++) {
+                writeHtml(i);
+            }
+        }
+    }
 }
 function drawCard() {
     if (deck.length > 0) {
@@ -48,6 +65,11 @@ function drawCard() {
         alert("The deck is empty.");
     }
 }
+document.body.onkeyup = function (pressedKey) {
+    if (pressedKey.keyCode == 32) {
+        drawCard();
+    }
+};
 function sortCards() {
     handCards.sort(function (a, b) {
         return a.order - b.order;

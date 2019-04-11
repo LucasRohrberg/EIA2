@@ -17,7 +17,9 @@ document.getElementById("sortCards").addEventListener("click", sortDisplay);
 document.getElementById("deck").addEventListener("click", drawCard);
 
 let handCards: Card[] = [];
+let playedCards: Card[] = [];
 let newCard: string = "";
+let newestPlayedCard: string = "";
 let cardAmount: number;
 
 let deck: Card[] = [{ type: "hearts", order: 0, score: "7" }, { type: "hearts", order: 1, score: "8" }, { type: "hearts", order: 2, score: "9" }, { type: "hearts", order: 3, score: "10" }, { type: "hearts", order: 4, score: "jack" }, { type: "hearts", order: 5, score: "queen" }, { type: "hearts", order: 6, score: "king" }, { type: "hearts", order: 7, score: "ace" },
@@ -41,17 +43,31 @@ function dealCards(_handCardsTotal: number) {
     }
 }
 
-function writeHtml(_position: number) {
+function writeHtml(_position: number): void {
     newCard += `<div class="${handCards[_position].type}" id="${handCards[_position].order}">${handCards[_position].score} of ${handCards[_position].type}</div>`;
     document.getElementById("handCards").innerHTML = newCard;
-    document.getElementById("deck").innerHTML = `deck: ${deck.length} cards left.`
+    document.getElementById("handCards").addEventListener("click", playCard);
+    document.getElementById("deck").innerHTML = `deck: ${deck.length} cards left.`;
 }
 
-function playCard() {
-
+function playCard(): void {
+    let cardID: HTMLElement = <HTMLElement>event.target;
+    for (let i = 0; i < handCards.length; i++) {
+        if (Number(cardID.getAttribute("id")) == handCards[i].order) {
+            playedCards.push(handCards[i]);
+            newestPlayedCard = `<div class="${playedCards[playedCards.length - 1].type}" id="${playedCards[playedCards.length - 1].order}">${playedCards[playedCards.length - 1].score} of ${playedCards[playedCards.length - 1].type}</div>`;
+            document.getElementById("playedCards").innerHTML = newestPlayedCard;
+            handCards.splice(i, 1);
+            document.getElementById("handCards").innerHTML = "";
+            newCard = "";
+            for (let i = 0; i < handCards.length; i++) {
+                writeHtml(i);
+            }
+        }
+    }
 }
 
-function drawCard() {
+function drawCard(): void {
     if (deck.length > 0) {
         let randomNumber: number = Math.floor(Math.random() * deck.length);
         handCards.push(deck[randomNumber]);
@@ -62,20 +78,25 @@ function drawCard() {
     }
 }
 
-function sortCards() {
+document.body.onkeyup = function(pressedKey){
+    if(pressedKey.keyCode == 32){
+        drawCard();
+    }
+}
+
+function sortCards(): void {
     handCards.sort(function (a, b) {
         return a.order - b.order;
     });
 }
 
-function sortDisplay() {
+function sortDisplay(): void {
     sortCards();
     document.getElementById("handCards").innerHTML = "";
     newCard = "";
     for (let i = 0; i < handCards.length; i++) {
         writeHtml(i);
     }
-
 }
 
 dealCards(getCardAmount());
