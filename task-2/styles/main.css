@@ -4,7 +4,12 @@
 }
 
 body {
-    background-color: #008000;
+    background-image: url("img/table.png");
+    background-size: cover;
+}
+
+main {
+    margin-top: 35px;
 }
 
 #nonPlayerArea {
@@ -25,8 +30,19 @@ body {
     border-radius: 3%;
 }
 
+#deck {
+    background-image: url("img/deck.png");
+    background-size: cover;
+    color: #ffffff;
+}
+
+#playedCards {
+    background-image: url("img/played.png");
+    background-size: cover;
+    color: #ffffff;
+}
+
 #handCards {
-    background-color: #008000;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -45,6 +61,11 @@ body {
     border-radius: 3%;
 }
 
+#handCards div:hover {
+    outline: 1px solid white;
+    cursor: pointer;
+}
+
 #playedCards div {
     color: white;
     text-align: center;
@@ -58,52 +79,47 @@ body {
 #playerArea {
     display: flex;
     flex-direction: column;
+    border: 3px solid #e7e771;
+    padding-bottom: 2%;
+    margin: 1%;
 }
 
 #playerArea button {
+    margin-top: 0.75%;
     padding: 0.5%;
     width: 100px;
     align-self: center;
-    background-color: #26bd26;
+    background-color: #468546;
     color: #ffffff;
 }
 
 #playerArea button:hover {
     background-color: #034203;
+    cursor: pointer;
 }
 
 .hearts  {
-    background-color: #ff0000 !important;
+    background-image: url("img/hearts.png");
+    background-size: cover;
 }
 
 .diamonds  {
-    background-color: #a80000 !important;
+    background-image: url("img/diamonds.png");
+    background-size: cover;
 }
 
 .spades  {
-    background-color: #0f0f0f !important;
+    background-image: url("img/spades.png");
+    background-size: cover;
 }
 
 .clubs  {
-    background-color: #292929 !important;
-}
-
-.hearts:hover {
-    background-color: #c20000 !important;
-}
-
-.diamonds:hover  {
-    background-color: #770000 !important;
-}
-
-.spades:hover  {
-    background-color: #000000 !important;
-}
-
-.clubs:hover  {
-    background-color: #161616 !important;
+    background-image: url("img/clubs.png");
+    background-size: cover;
 }
 
 #deck:hover {
     background-color: #dddddd;
+    outline: 1px solid #ffffff;
+    cursor: pointer;
 }

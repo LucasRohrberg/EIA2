@@ -2,7 +2,7 @@
 Aufgabe: <3 - Mau Mau wird interaktiv>
 Name: <Lucas Rohrberg>
 Matrikel: <260241>
-Datum: <11. April 2019, 04:08Uhr>
+Datum: <14. April 2019, 16:28Uhr>
     
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
@@ -37,7 +37,7 @@ function writeHtml(_position) {
     newCard += `<div class="${handCards[_position].type}" id="${handCards[_position].order}">${handCards[_position].score} of ${handCards[_position].type}</div>`;
     document.getElementById("handCards").innerHTML = newCard;
     document.getElementById("handCards").addEventListener("click", playCard);
-    document.getElementById("deck").innerHTML = `deck: ${deck.length} cards left`;
+    document.getElementById("deck").innerHTML = `${deck.length} cards left`;
 }
 function playCard() {
     let cardID = event.target;
