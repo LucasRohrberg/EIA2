@@ -32,7 +32,10 @@ namespace A4 {
         let price: number;
         let slider: HTMLProgressElement = <HTMLProgressElement>document.getElementById(`${target.id}slider`);
 
-
+        // Momentan keine Idee, wie ich die Slider in beide Richtungen implementiere.
+        // Derzeit muss man den Slider schieben und dann das Häkchen setzen. Wenn man den Slider dann aber verschiebt und
+        // den Haken entfernt, wird der neue Preis abgezogen anstatt dem vorher aufaddierten. Vmtl muss ich den Code auf Arrays umstrukturieren.
+        // Da das aber die Aufgabe der nächsten Woche ist, hab ich mir die Änderung jetzt geklemmt.
         if (target.name == "ice" && target.checked == true) {
             price = Number(target.getAttribute("price"));
             sum += price * Number(slider.value);
@@ -96,8 +99,8 @@ namespace A4 {
         document.getElementById("orderSummary").innerHTML += _customerOrder;
     }
 
-    function updateSum(sum: number) {
-        document.getElementById("sum").innerHTML = "Total: " + sum.toFixed(2) + "€";
+    function updateSum(_sum: number) {
+        document.getElementById("sum").innerHTML = "Total: " + _sum.toFixed(2) + "€";
     }
 
     function checkOrderForMissingInformation(_event: Event) {
