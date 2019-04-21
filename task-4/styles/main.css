@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f3b6c0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #e27ea0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    padding: 2% 0 2% 0;
+    box-shadow: 3px 3px 10px #3a3a3a;
+}
+
+main {
+    padding: 15% 0 10% 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+footer {
+    background-color: #7c3743;
+    position: fixed;
+    bottom: 0;
+    height: 125px;
+    overflow: scroll;
+    width: 100%;
+    color: white;
+    text-align: center;
+    padding: 2%;
+    box-shadow: -3px -3px 10px #3a3a3a;
+}
+
+fieldset {
+    width: 85%;
+    padding: 2%;
+    margin-bottom: 2%;
+}
+
+button {
+    border-style: none;
+    padding: 0.5%;
+    margin-bottom: 1%;
+}
+
+button:hover {
+    background-color: #494949;
+    color: white;
+}
+
+#missingInformation {
+    color: #ff5858;
+}
+
+@media (min-width: 1024px) {
+    main {
+        padding-top: 10%;
+    }
+
+    footer {
+        height: 100px;
+    }
+
+    fieldset {
+        width: 50%;
+    }
+
+
+
+    #adress {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #adress input {
+        margin-bottom: 2%;
+    }
+
+    #icecream div {
+        width: 20%;
+        margin: 0;
+    }
+}

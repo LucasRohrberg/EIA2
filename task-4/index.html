@@ -10,10 +10,7 @@
 </head>
 <body>
     <header>
-        <nav>
-
-        </nav>
-        <output id="sum" name="sumDisplay"></output>
+        <output id="sum" name="sumDisplay">Total: 0.00€</output>
     </header>
     <main>
         <fieldset id="icecream">
@@ -22,32 +19,32 @@
             <div>
                 <input type="checkbox" name="ice" value="Chocolate" id="ice1" price="1.00"/>
                 <label for="ice1">Chocolate </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice1slider"/>
             </div>
             <div>
                 <input type="checkbox" name="ice" value="Strawberry" id="ice2" price="1.00"/>
                 <label for="ice2">Strawberry </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice2slider"/>
             </div>
             <div>
                 <input type="checkbox" name="ice" value="Vanilla" id="ice3" price="1.00"/>
                 <label for="ice3">Vanilla </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice3slider"/>
             </div>
             <div>
                 <input type="checkbox" name="ice" value="Melon" id="ice4" price="1.00"/>
                 <label for="ice4">Melon </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice4slider"/>
             </div>
             <div>
                 <input type="checkbox" name="ice" value="Hazelnut" id="ice5" price="1.00"/>
                 <label for="ice5">Hazelnut </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice5slider"/>
             </div>
             <div>
                 <input type="checkbox" name="ice" value="Banana" id="ice6" price="1.00"/>
                 <label for="ice6">Banana </label>
-                <input type="range" name="slider" min="0" max="10" step="1" value="0"/>
+                <input type="range" name="slider" min="1" max="10" step="1" value="0" id="ice6slider"/>
             </div>
         </fieldset>
         <fieldset id="extra">
@@ -64,29 +61,33 @@
         </fieldset>
         <fieldset id="iceContainer">
             <legend>Ice Container</legend>
-            <input type="radio" name="radiogroup1" value="cone" id="cone" />
-            <label for="radio1">Cone </label>
-            <input type="radio" name="radiogroup1" value="cup" id="cup" />
-            <label for="radio1">Cup </label>
+            <input type="radio" name="radiogroup1" value="Cone" id="cone" />
+            <label for="cone">Cone </label>
+            <input type="radio" name="radiogroup1" value="Cup" id="cup" />
+            <label for="cup">Cup </label>
         </fieldset>
         <fieldset id="deliveryOptions">
             <legend>Delivery Options</legend>
-            <input type="radio" name="radiogroup2" value="delivery" id="delivery" />
-            <label for="radio1">Delivery </label>
-            <input type="radio" name="radiogroup2" value="pickup" id="pickup" />
-            <label for="radio1">Pickup </label>
+            <input type="radio" name="radiogroup2" value="Delivery" id="delivery" price="2.00" />
+            <label for="delivery">Delivery (2€) </label>
+            <input type="radio" name="radiogroup2" value="Pickup" id="pickup" price="0.00" />
+            <label for="pickup">Pickup (Free)</label>
         </fieldset>
         <fieldset id="adress">
             <legend>Adress</legend>
-            <input type="text" name="firstName" placeholder="first name" required/>
-            <input type="text" name="lastName" placeholder="last name" required/>
-            <input type="text" name="street" placeholder="street name" required/>
-            <input type="text" name="houseNumber" placeholder="house number" required/>
-            <input type="text" name="zipCode" placeholder="zip code" required/>
+            <input type="text" name="firstName" placeholder="First name" required/>
+            <input type="text" name="lastName" placeholder="Last name" required/>
+            <input type="text" name="street" placeholder="Street name" required/>
+            <input type="text" name="houseNumber" placeholder="House number" required/>
+            <input type="text" name="zipCode" placeholder="Zip code" required/>
         </fieldset>
     </main>
     <footer>
-        <div id="orderSummary"></div>
+        <button id="checkOrder">Check your order.</button>
+        <div id="orderSummary">
+            <div id="summaryContainer"></div>
+        </div>
+        <div id="missingInformation"></div>
     </footer>
 </body>
 </html>
