@@ -20,7 +20,7 @@ namespace A5 {
 
     function handleChange(_event: Event): void {
         let target: HTMLInputElement = <HTMLInputElement>_event.target;
-        document.getElementById("sum").innerHTML = String(calculateSum(target)) + "€";
+        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum(target))}€ <hr>`;
     }
 
     function calculateSum(_target: HTMLInputElement): number {
@@ -95,8 +95,11 @@ namespace A5 {
             }
             if (_key != "IceCream") fieldset.appendChild(input);
             fieldset.appendChild(label);
-            if (_key == "IceCream") fieldset.appendChild(slider);
-            document.body.appendChild(fieldset);
+            if (_key == "IceCream") {
+                fieldset.appendChild(slider);
+                fieldset.setAttribute("id", "iceCream");
+            }
+            document.getElementById("iceCreamContent").appendChild(fieldset);
             fieldset.addEventListener("change", handleChange);
         }
 

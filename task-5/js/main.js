@@ -18,7 +18,7 @@ var A5;
     }
     function handleChange(_event) {
         let target = _event.target;
-        document.getElementById("sum").innerHTML = String(calculateSum(target)) + "€";
+        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum(target))}€ <hr>`;
     }
     function calculateSum(_target) {
         sum = 0;
@@ -87,9 +87,11 @@ var A5;
             if (_key != "IceCream")
                 fieldset.appendChild(input);
             fieldset.appendChild(label);
-            if (_key == "IceCream")
+            if (_key == "IceCream") {
                 fieldset.appendChild(slider);
-            document.body.appendChild(fieldset);
+                fieldset.setAttribute("id", "iceCream");
+            }
+            document.getElementById("iceCreamContent").appendChild(fieldset);
             fieldset.addEventListener("change", handleChange);
         }
         group++;
