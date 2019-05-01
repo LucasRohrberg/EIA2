@@ -2,12 +2,12 @@ var A5;
 (function (A5) {
     A5.shopData = {
         "IceCream": [
-            { product: "Chocolate", price: 1, type: "checkbox" },
-            { product: "Strawberry", price: 1, type: "checkbox" },
-            { product: "Vanilla", price: 1, type: "checkbox" },
-            { product: "Melon", price: 1, type: "checkbox" },
-            { product: "Hazelnut", price: 1, type: "checkbox" },
-            { product: "Banana", price: 1, type: "checkbox" }
+            { product: "Chocolate", price: 1, type: "range" },
+            { product: "Strawberry", price: 1, type: "range" },
+            { product: "Vanilla", price: 1, type: "range" },
+            { product: "Melon", price: 1, type: "range" },
+            { product: "Hazelnut", price: 1, type: "range" },
+            { product: "Banana", price: 1, type: "range" }
         ],
         "Extras": [
             { product: "Cream", price: 0.50, type: "checkbox" },
