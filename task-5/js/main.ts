@@ -10,7 +10,7 @@ namespace A5 {
     window.addEventListener("DOMContentLoaded", init);
 
     let sum: number = 0;
-    let group: number = 0;
+    let radioGroup: number = 0;
     let allInputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
 
     function init(_event: Event): void {
@@ -18,44 +18,9 @@ namespace A5 {
         document.getElementById("checkOrder").addEventListener("click", checkOrderForMissingInformation);
     }
 
-    function handleChange(_event: Event): void {
-        let target: HTMLInputElement = <HTMLInputElement>_event.target;
-        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum(target))}€ <hr>`;
-    }
-
-    function calculateSum(_target: HTMLInputElement): number {
-        sum = 0;
-        for (let i: number = 0; i < allInputs.length; i++) {
-            if (allInputs[i].type == "range") {
-                sum += Number(allInputs[i].getAttribute("price")) * Number(allInputs[i].value);
-            }
-            if (allInputs[i].checked == true) {
-                sum += Number(allInputs[i].getAttribute("price"));
-            }
-        }
-        writeOrderSummary(allInputs);
-        return sum;
-    }
-
-    function writeOrderSummary(_allInputs: HTMLCollectionOf<HTMLInputElement>): void {
-        let orderSummaryText: string = "";
-        
-        for (let i: number = 0; i < _allInputs.length; i++) {
-            if (_allInputs[i].getAttribute("type") == "range") {
-                if (Number(_allInputs[i].value) > 0) {
-                    orderSummaryText += `${_allInputs[i].value}x ${_allInputs[i].id} - ${_allInputs[i].getAttribute("price")}€<br>`;
-                }
-            }
-            if (_allInputs[i].checked == true) {
-                orderSummaryText += `${_allInputs[i].id} - ${_allInputs[i].getAttribute("price")}€<br>`;
-            }
-        }
-        document.getElementById("orderSummary").innerHTML = orderSummaryText;
-    }
-
-    function displayContent(_data: HomoData): void {
-        for (let key in _data) {
-            let value: HeteroData[] = _data[key];
+    function displayContent(_shopData: HomoData): void {
+        for (let key in _shopData) {
+            let value: HeteroData[] = _shopData[key];
             fillContent(key, value);
         }
     }
@@ -75,8 +40,8 @@ namespace A5 {
             input.setAttribute("id", _value[i].product);
             input.setAttribute("price", _value[i].price.toString());
             if (_value[i].type == "radio") {
-                input.setAttribute("type", "radio");
-                let newGroup: string = _value[i].type + String(group);
+                let newGroup: string = _value[i].type + String(radioGroup);
+                input.setAttribute("type", _value[i].type );
                 input.setAttribute("name", newGroup);
                 input.required = true;
             }
@@ -103,29 +68,62 @@ namespace A5 {
             fieldset.addEventListener("change", handleChange);
         }
 
-        group++;
+        radioGroup++;
     }
 
-    function checkOrderForMissingInformation(_event: Event): void {
-        let requiredInputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
+    function handleChange(_event: Event): void {
+        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum())}€ <hr>`;
+    }
+
+    function calculateSum(): number {
+        sum = 0;
+        for (let i: number = 0; i < allInputs.length; i++) {
+            if (allInputs[i].type == "range") {
+                sum += Number(allInputs[i].getAttribute("price")) * Number(allInputs[i].value);
+            }
+            if (allInputs[i].checked == true) {
+                sum += Number(allInputs[i].getAttribute("price"));
+            }
+        }
+        writeOrderSummary();
+        return sum;
+    }
+
+    function writeOrderSummary(): void {
+        let orderSummaryText: string = "";
+        
+        for (let i: number = 0; i < allInputs.length; i++) {
+            if (allInputs[i].getAttribute("type") == "range") {
+                if (Number(allInputs[i].value) > 0) {
+                    orderSummaryText += `${allInputs[i].value}x ${allInputs[i].id} - ${allInputs[i].getAttribute("price")}€<br>`;
+                }
+            }
+            if (allInputs[i].checked == true) {
+                orderSummaryText += `${allInputs[i].id} - ${allInputs[i].getAttribute("price")}€<br>`;
+            }
+        }
+        document.getElementById("orderSummary").innerHTML = orderSummaryText;
+    }
+
+    function checkOrderForMissingInformation(): void {
         let missingInfo: string = "";
         let orderedIce: number = 0;
 
-        for (let i: number = 0; i < requiredInputs.length; i++) {
-            for (let j: number = 0; j < requiredInputs.length; j++) {
-                if ((requiredInputs[i].id == "Cone" && requiredInputs[i].checked == false) && (requiredInputs[j].id == "Cup" && requiredInputs[j].checked == false)) {
+        for (let i: number = 0; i < allInputs.length; i++) {
+            for (let j: number = 0; j < allInputs.length; j++) {
+                if ((allInputs[i].id == "Cone" && allInputs[i].checked == false) && (allInputs[j].id == "Cup" && allInputs[j].checked == false)) {
                     missingInfo += `Please choose a container for your ice cream. \n`;
                 }
 
-                if ((requiredInputs[i].id == "Delivery" && requiredInputs[i].checked == false) && (requiredInputs[j].id == "Pickup" && requiredInputs[j].checked == false)) {
+                if ((allInputs[i].id == "Delivery" && allInputs[i].checked == false) && (allInputs[j].id == "Pickup" && allInputs[j].checked == false)) {
                     missingInfo += `Please choose a delivery option. \n`;
                 }
             }
             if (allInputs[i].type == "range" && Number(allInputs[i].value) > 0) {
                 orderedIce++;
             }
-            if (requiredInputs[i].hasAttribute("required") && requiredInputs[i].value == "") {
-                missingInfo += `${requiredInputs[i].placeholder} is missing. \n`;
+            if (allInputs[i].hasAttribute("required") && allInputs[i].value == "") {
+                missingInfo += `${allInputs[i].placeholder} is missing. \n`;
             }
         }
         if (orderedIce < 1) missingInfo += `Please choose at least 1 flavor of ice cream. \n`;

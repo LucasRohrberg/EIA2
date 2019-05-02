@@ -10,46 +10,15 @@ var A5;
 (function (A5) {
     window.addEventListener("DOMContentLoaded", init);
     let sum = 0;
-    let group = 0;
+    let radioGroup = 0;
     let allInputs = document.getElementsByTagName("input");
     function init(_event) {
         displayContent(A5.shopData);
         document.getElementById("checkOrder").addEventListener("click", checkOrderForMissingInformation);
     }
-    function handleChange(_event) {
-        let target = _event.target;
-        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum(target))}€ <hr>`;
-    }
-    function calculateSum(_target) {
-        sum = 0;
-        for (let i = 0; i < allInputs.length; i++) {
-            if (allInputs[i].type == "range") {
-                sum += Number(allInputs[i].getAttribute("price")) * Number(allInputs[i].value);
-            }
-            if (allInputs[i].checked == true) {
-                sum += Number(allInputs[i].getAttribute("price"));
-            }
-        }
-        writeOrderSummary(allInputs);
-        return sum;
-    }
-    function writeOrderSummary(_allInputs) {
-        let orderSummaryText = "";
-        for (let i = 0; i < _allInputs.length; i++) {
-            if (_allInputs[i].getAttribute("type") == "range") {
-                if (Number(_allInputs[i].value) > 0) {
-                    orderSummaryText += `${_allInputs[i].value}x ${_allInputs[i].id} - ${_allInputs[i].getAttribute("price")}€<br>`;
-                }
-            }
-            if (_allInputs[i].checked == true) {
-                orderSummaryText += `${_allInputs[i].id} - ${_allInputs[i].getAttribute("price")}€<br>`;
-            }
-        }
-        document.getElementById("orderSummary").innerHTML = orderSummaryText;
-    }
-    function displayContent(_data) {
-        for (let key in _data) {
-            let value = _data[key];
+    function displayContent(_shopData) {
+        for (let key in _shopData) {
+            let value = _shopData[key];
             fillContent(key, value);
         }
     }
@@ -65,8 +34,8 @@ var A5;
             input.setAttribute("id", _value[i].product);
             input.setAttribute("price", _value[i].price.toString());
             if (_value[i].type == "radio") {
-                input.setAttribute("type", "radio");
-                let newGroup = _value[i].type + String(group);
+                let newGroup = _value[i].type + String(radioGroup);
+                input.setAttribute("type", _value[i].type);
                 input.setAttribute("name", newGroup);
                 input.required = true;
             }
@@ -94,26 +63,55 @@ var A5;
             document.getElementById("iceCreamContent").appendChild(fieldset);
             fieldset.addEventListener("change", handleChange);
         }
-        group++;
+        radioGroup++;
     }
-    function checkOrderForMissingInformation(_event) {
-        let requiredInputs = document.getElementsByTagName("input");
+    function handleChange(_event) {
+        document.getElementById("sum").innerHTML = `Total: ${String(calculateSum())}€ <hr>`;
+    }
+    function calculateSum() {
+        sum = 0;
+        for (let i = 0; i < allInputs.length; i++) {
+            if (allInputs[i].type == "range") {
+                sum += Number(allInputs[i].getAttribute("price")) * Number(allInputs[i].value);
+            }
+            if (allInputs[i].checked == true) {
+                sum += Number(allInputs[i].getAttribute("price"));
+            }
+        }
+        writeOrderSummary();
+        return sum;
+    }
+    function writeOrderSummary() {
+        let orderSummaryText = "";
+        for (let i = 0; i < allInputs.length; i++) {
+            if (allInputs[i].getAttribute("type") == "range") {
+                if (Number(allInputs[i].value) > 0) {
+                    orderSummaryText += `${allInputs[i].value}x ${allInputs[i].id} - ${allInputs[i].getAttribute("price")}€<br>`;
+                }
+            }
+            if (allInputs[i].checked == true) {
+                orderSummaryText += `${allInputs[i].id} - ${allInputs[i].getAttribute("price")}€<br>`;
+            }
+        }
+        document.getElementById("orderSummary").innerHTML = orderSummaryText;
+    }
+    function checkOrderForMissingInformation() {
         let missingInfo = "";
         let orderedIce = 0;
-        for (let i = 0; i < requiredInputs.length; i++) {
-            for (let j = 0; j < requiredInputs.length; j++) {
-                if ((requiredInputs[i].id == "Cone" && requiredInputs[i].checked == false) && (requiredInputs[j].id == "Cup" && requiredInputs[j].checked == false)) {
+        for (let i = 0; i < allInputs.length; i++) {
+            for (let j = 0; j < allInputs.length; j++) {
+                if ((allInputs[i].id == "Cone" && allInputs[i].checked == false) && (allInputs[j].id == "Cup" && allInputs[j].checked == false)) {
                     missingInfo += `Please choose a container for your ice cream. \n`;
                 }
-                if ((requiredInputs[i].id == "Delivery" && requiredInputs[i].checked == false) && (requiredInputs[j].id == "Pickup" && requiredInputs[j].checked == false)) {
+                if ((allInputs[i].id == "Delivery" && allInputs[i].checked == false) && (allInputs[j].id == "Pickup" && allInputs[j].checked == false)) {
                     missingInfo += `Please choose a delivery option. \n`;
                 }
             }
             if (allInputs[i].type == "range" && Number(allInputs[i].value) > 0) {
                 orderedIce++;
             }
-            if (requiredInputs[i].hasAttribute("required") && requiredInputs[i].value == "") {
-                missingInfo += `${requiredInputs[i].placeholder} is missing. \n`;
+            if (allInputs[i].hasAttribute("required") && allInputs[i].value == "") {
+                missingInfo += `${allInputs[i].placeholder} is missing. \n`;
             }
         }
         if (orderedIce < 1)
