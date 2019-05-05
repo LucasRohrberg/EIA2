@@ -1,0 +1,12 @@
+6.2.4:
+_response.write schreibt die URL in den Output, 
+dieser wird dann auf der Seite angezeigt. Text hinter dem
+/ in der URL wird folglich auf der Seite dargestellt
+
+6.2.5:
+Über console.log(_request) sind alle in _request gespeicherten
+Informationen vorhanden. _request.url greift dann auf die URL zu
+Der console.log Output liegt dabei dann im Terminal
+
+6.2.6:
+Strg+C beendet den Server
