@@ -1,8 +1,8 @@
 /*
-Aufgabe: <5 - Eisdealer Reloaded>
+Aufgabe: <6 - Erster eigener Server>
 Name: <Lucas Rohrberg>
 Matrikel: <260241>
-Datum: <2. Mai 2019, 0:32Uhr>
+Datum: <5. Mai 2019, 12:34Uhr>
 	
 Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde nicht kopiert und auch nicht diktiert.
 */
@@ -10,28 +10,11 @@ namespace A6 {
     window.addEventListener("DOMContentLoaded", init);
 
     let sum: number = 0;
-    let radioGroup: number = 0;
     let allInputs: HTMLCollectionOf<HTMLInputElement> = document.getElementsByTagName("input");
-    // let serverAdress: string = "https://localhost:8100/";
-    let serverAdress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/";
 
     function init(_event: Event): void {
         displayContent(shopData);
         document.getElementById("checkOrder").addEventListener("click", checkOrderForMissingInformation);
-        document.getElementById("submit").addEventListener("click", submitData);
-    }
-
-    function submitData(): void {
-        for (let i: number = 0; i < allInputs.length; i++) {
-            if (allInputs[i].type == "range" && Number(allInputs[i].value) > 0) {
-                serverAdress += `${allInputs[i].id}=${allInputs[i].value}_`;
-            }
-            if (allInputs[i].checked == true) {
-                serverAdress += `${allInputs[i].id}=${allInputs[i].value}_`;
-            }
-        }
-
-        window.open(serverAdress);
     }
 
     function displayContent(_shopData: HomoData): void {
@@ -56,9 +39,9 @@ namespace A6 {
             input.setAttribute("id", _value[i].product);
             input.setAttribute("price", _value[i].price.toString());
             if (_value[i].type == "radio") {
-                let newGroup: string = _value[i].type + String(radioGroup);
-                input.setAttribute("type", _value[i].type );
-                input.setAttribute("name", newGroup);
+                input.setAttribute("value", _value[i].product);
+                input.setAttribute("type", _value[i].type);
+                input.setAttribute("name", _key);
                 input.required = true;
             }
             if (_value[i].type != "radio") input.setAttribute("type", _value[i].type);
@@ -66,7 +49,7 @@ namespace A6 {
             label.innerText = `${_value[i].product} `;
             if (_key == "IceCream") {
                 slider.setAttribute("type", _value[i].type);
-                slider.setAttribute("name", "slider");
+                slider.setAttribute("name", _value[i].product);
                 slider.setAttribute("min", "0");
                 slider.setAttribute("max", "9");
                 slider.setAttribute("step", "1");
@@ -83,8 +66,6 @@ namespace A6 {
             document.getElementById("iceCreamContent").appendChild(fieldset);
             fieldset.addEventListener("change", handleChange);
         }
-
-        radioGroup++;
     }
 
     function handleChange(_event: Event): void {
@@ -107,7 +88,7 @@ namespace A6 {
 
     function writeOrderSummary(): void {
         let orderSummaryText: string = "";
-        
+
         for (let i: number = 0; i < allInputs.length; i++) {
             if (allInputs[i].getAttribute("type") == "range") {
                 if (Number(allInputs[i].value) > 0) {

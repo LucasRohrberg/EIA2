@@ -8,9 +8,11 @@
     <script src="./js/main.js"></script>
     <script src="./js/data.js"></script>
     
-    <title>Aisdiela Rilodet</title>
+    <title>Eigener Server</title>
 </head>
 <body>
+    <form action="https://lucasrohrberg-eisdieler.herokuapp.com/">
+    <!-- <form action="https://localhost:8100/"> -->
     <main> 
         <div id="test">
             <fieldset id="adress">
@@ -26,9 +28,10 @@
                 <p id="sum">Total: 0€</p><hr>
                 <div id="orderSummary"></div>
                 <button id="checkOrder">Check your order.</button>
-                <button id="submit">Submit your order.</button>
+                <button id="submit" type="submit">Submit your order.</button>
             </div>
         </div>
     </main>
+    </form>
 </body>
 </html>
