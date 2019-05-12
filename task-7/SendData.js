@@ -1,8 +1,8 @@
 var A7;
 (function (A7) {
     window.addEventListener("DOMContentLoaded", init);
-    let adress = "http://localhost:8100/?";
-    // let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/?";
+    // let adress: string = "http://localhost:8100/?";
+    let adress = "https://lucasrohrberg-eisdieler.herokuapp.com/?";
     function init(_event) {
         document.getElementById("submitOrder").addEventListener("click", writeURL);
         console.log("init works.");
