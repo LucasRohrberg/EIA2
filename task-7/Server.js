@@ -19,7 +19,7 @@ function handleRequest(_request, _response) {
     _response.setHeader("Access-Control-Allow-Origin", "*");
     let url = Url.parse(_request.url, true);
     for (let key in url.query) {
-        _response.write(key + "=" + url.query[key]);
+        _response.write(`${key}=${url.query[key]}`);
     }
     _response.end();
 }

@@ -1,7 +1,7 @@
 namespace A7 {
     window.addEventListener("DOMContentLoaded", init);
-    let adress: string = "http://localhost:8100/?";
-    // let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/";
+    // let adress: string = "http://localhost:8100/?";
+    let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/";
 
     function init(_event: Event): void {
         document.getElementById("submitOrder").addEventListener("click", writeURL);
@@ -13,7 +13,9 @@ namespace A7 {
         let generateURL: string = "";
 
         for (let i: number = 0; i < allInputs.length; i++) {
-            generateURL += allInputs[i].name + "=" + allInputs[i].value + "&";
+            if (allInputs[i].type != "radio" && allInputs[i].type != "checkbox") generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
+            if (allInputs[i].type == "radio") if (allInputs[i].checked == true) generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
+            if (allInputs[i].type == "checkbox") if (allInputs[i].checked == true) generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
         }
         console.log(generateURL);
         useURL(generateURL);
