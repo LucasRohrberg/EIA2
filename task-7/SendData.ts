@@ -1,10 +1,10 @@
 namespace A7 {
     window.addEventListener("DOMContentLoaded", init);
-    // let adress: string = "http://localhost:8100/";
-    let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/";
+    let adress: string = "http://localhost:8100/?";
+    // let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/";
 
     function init(_event: Event): void {
-        document.getElementById("submit").addEventListener("click", writeURL);
+        document.getElementById("submitOrder").addEventListener("click", writeURL);
         console.log("init works.");
     }
 
@@ -13,7 +13,7 @@ namespace A7 {
         let generateURL: string = "";
 
         for (let i: number = 0; i < allInputs.length; i++) {
-            generateURL += allInputs[i].name;
+            generateURL += allInputs[i].name + "=" + allInputs[i].value + "&";
         }
         console.log(generateURL);
         useURL(generateURL);
@@ -22,7 +22,7 @@ namespace A7 {
     function useURL(_generateURL: string): void {
         let xhr: XMLHttpRequest = new XMLHttpRequest();
         console.log(adress + _generateURL);
-        xhr.open("GET", adress + _generateURL , true);
+        xhr.open("GET", adress + _generateURL, true);
         xhr.addEventListener("readystatechange", handleStateChange);
         xhr.send();
     }
@@ -33,4 +33,4 @@ namespace A7 {
             document.getElementById("serverText").innerHTML = xhr.response;
         }
     }
-} 
+}
