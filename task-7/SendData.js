@@ -1,8 +1,8 @@
 var A7;
 (function (A7) {
     window.addEventListener("DOMContentLoaded", init);
-    // let adress: string = "http://localhost:8100/?";
-    let adress = "https://lucasrohrberg-eisdieler.herokuapp.com/?";
+    let adress = "http://localhost:8100/?";
+    // let adress: string = "https://lucasrohrberg-eisdieler.herokuapp.com/?";
     function init(_event) {
         document.getElementById("submitOrder").addEventListener("click", writeURL);
         console.log("init works.");
@@ -12,13 +12,13 @@ var A7;
         let generateURL = "";
         for (let i = 0; i < allInputs.length; i++) {
             if (allInputs[i].type != "radio" && allInputs[i].type != "checkbox")
-                generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
+                generateURL += `${allInputs[i].name}=${allInputs[i].value}&`;
             if (allInputs[i].type == "radio")
                 if (allInputs[i].checked == true)
-                    generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
+                    generateURL += `${allInputs[i].name}=${allInputs[i].value}&`;
             if (allInputs[i].type == "checkbox")
                 if (allInputs[i].checked == true)
-                    generateURL += `${allInputs[i].name}=${allInputs[i].value}&<br>`;
+                    generateURL += `${allInputs[i].name}=${allInputs[i].value}&`;
         }
         console.log(generateURL);
         useURL(generateURL);

@@ -23,7 +23,14 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
 
   let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
   for (let key in url.query) {
-  _response.write(`${key}=${url.query[key]}`);
+    _response.write(`<body>`);
+    _response.write(`<fieldset>`);
+    _response.write(`<legend>`);
+    _response.write(`${key}`);
+    _response.write(`</legend>`);
+    _response.write(`${url.query[key]}`);
+    _response.write(`</fieldset>`);
+    _response.write(`</body>`);
   }
   _response.end();
 }
