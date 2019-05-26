@@ -36,7 +36,7 @@ function getCardAmount(): number {
 }
 
 function dealCards(_handCardsTotal: number): void {
-    for (let i = 0; i < _handCardsTotal; i++) {
+    for (let i: number = 0; i < _handCardsTotal; i++) {
         let randomNumber: number = Math.floor(Math.random() * deck.length);
         handCards.push(deck[randomNumber]);
         deck.splice(randomNumber, 1);
@@ -53,7 +53,7 @@ function writeHtml(_position: number): void {
 
 function playCard(): void {
     let cardID: HTMLElement = <HTMLElement>event.target;
-    for (let i = 0; i < handCards.length; i++) {
+    for (let i: number = 0; i < handCards.length; i++) {
         if (Number(cardID.getAttribute("id")) == handCards[i].order) {
             playedCards.push(handCards[i]);
             newestPlayedCard = `<div class="${playedCards[playedCards.length - 1].type}" id="${playedCards[playedCards.length - 1].order}">${playedCards[playedCards.length - 1].score} of ${playedCards[playedCards.length - 1].type}</div>`;
@@ -61,7 +61,7 @@ function playCard(): void {
             handCards.splice(i, 1);
             document.getElementById("handCards").innerHTML = "";
             newCard = "";
-            for (let i = 0; i < handCards.length; i++) {
+            for (let i: number = 0; i < handCards.length; i++) {
                 writeHtml(i);
             }
         }
@@ -73,7 +73,7 @@ function drawCard(): void {
         let randomNumber: number = Math.floor(Math.random() * deck.length);
         handCards.push(deck[randomNumber]);
         deck.splice(randomNumber, 1);
-        writeHtml(handCards.length - 1)
+        writeHtml(handCards.length - 1);
     } else {
         alert("The deck is empty.");
     }
@@ -83,7 +83,7 @@ function checkSpacebar(event: KeyboardEvent): void {
     if (event.keyCode == 32) drawCard();
 }
 
-function sortCards() {
+function sortCards(): void {
     handCards.sort(sortingCommand);
 }
 
@@ -99,7 +99,7 @@ function sortDisplay(): void {
     sortCards();
     document.getElementById("handCards").innerHTML = "";
     newCard = "";
-    for (let i = 0; i < handCards.length; i++) {
+    for (let i: number = 0; i < handCards.length; i++) {
         writeHtml(i);
     }
 }
