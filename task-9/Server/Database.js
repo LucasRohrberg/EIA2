@@ -6,15 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const Mongo = require("mongodb");
 console.log("Database starting");
-let databaseURL = "mongodb://localhost:27017";
-let databaseName = "Test";
+// let databaseURL: string = "mongodb://localhost:27017";
+let databaseURL = "mongodb+srv://user_name:user_password@cluster0-zbvub.mongodb.net/database";
+let databaseName = "database";
 let db;
 let students;
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     //    databaseURL = "mongodb://username:password@hostname:port/database";
-    databaseURL = "mongodb+srv://testuser:testpassword@eia2-57vpd.mongodb.net/eia2";
-    databaseName = "eia2";
+    databaseURL = "mongodb+srv://user_name:user_password@cluster0-zbvub.mongodb.net/database";
+    databaseName = "database";
 }
 // try to connect to database, then activate callback "handleConnect" 
 Mongo.MongoClient.connect(databaseURL, { connectTimeoutMS: 8000 }, handleConnect);
@@ -57,7 +58,7 @@ function handleInsert(_e) {
 // try to fetch all documents from database, then activate callback
 function findAll(_callback) {
     // cursor points to the retreived set of documents in memory
-    var cursor = students.find(); // Zeiger auf alle gefundenen Dokumente
+    let cursor = students.find(); // Zeiger auf alle gefundenen Dokumente
     // try to convert to array, then activate callback "prepareAnswer"
     cursor.toArray(prepareAnswer); // fügt alle mit students.find() gefundenen Dokumente in ein Array hinzu // toArray erwartet callback Funktion
     // toArray-handler receives two standard parameters, an error object and the array

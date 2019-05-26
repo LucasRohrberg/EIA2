@@ -63,7 +63,7 @@ function handleInsert(_e: Mongo.MongoError): void {
 // try to fetch all documents from database, then activate callback
 export function findAll(_callback: Function): void {
     // cursor points to the retreived set of documents in memory
-    var cursor: Mongo.Cursor = students.find(); // Zeiger auf alle gefundenen Dokumente
+    let cursor: Mongo.Cursor = students.find(); // Zeiger auf alle gefundenen Dokumente
     // try to convert to array, then activate callback "prepareAnswer"
     cursor.toArray(prepareAnswer); // fügt alle mit students.find() gefundenen Dokumente in ein Array hinzu // toArray erwartet callback Funktion
 

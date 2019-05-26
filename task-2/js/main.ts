@@ -87,7 +87,7 @@ function sortCards(): void {
     handCards.sort(sortingCommand);
 }
 
-function sortingCommand(a: Card, b: Card): number {
+function sortingCommand(a: Card, b: Card): any {
     let orderA: number = a.order;
     let orderB: number = b.order;
     if (orderA < orderB) return -1;
