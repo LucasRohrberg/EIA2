@@ -5,7 +5,8 @@
 import * as Mongo from "mongodb";
 console.log("Database starting");
 
-let databaseURL: string = "mongodb://localhost:27017";
+// let databaseURL: string = "mongodb://localhost:27017";
+let databaseURL: string = "mongodb+srv://user_name:user_password@cluster0-zbvub.mongodb.net/database";
 let databaseName: string = "database";
 let db: Mongo.Db;
 let students: Mongo.Collection;
@@ -13,7 +14,7 @@ let students: Mongo.Collection;
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     //    databaseURL = "mongodb://username:password@hostname:port/database";
-    databaseURL = "mongodb+srv://user_name:user_password@cluster0-zbvub.mongodb.net/test";
+    databaseURL = "mongodb+srv://user_name:user_password@cluster0-zbvub.mongodb.net/database";
     databaseName = "database";
 }
 
