@@ -8,7 +8,7 @@ Hiermit versichere ich, dass ich diesen Code selbst geschrieben habe. Er wurde n
 */
 document.getElementById("sortCards").addEventListener("click", sortDisplay);
 document.getElementById("deck").addEventListener("click", drawCard);
-window.addEventListener("keydown", checkSpacebar);
+document.addEventListener("keydown", checkSpacebar);
 let handCards = [];
 let playedCards = [];
 let newCard = "";

@@ -15,7 +15,7 @@ interface Card {
 
 document.getElementById("sortCards").addEventListener("click", sortDisplay);
 document.getElementById("deck").addEventListener("click", drawCard);
-window.addEventListener("keydown", checkSpacebar);
+document.addEventListener("keydown", checkSpacebar);
 
 let handCards: Card[] = [];
 let playedCards: Card[] = [];
