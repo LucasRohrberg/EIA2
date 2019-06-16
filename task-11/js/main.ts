@@ -1,52 +1,102 @@
 namespace t11 {
     document.addEventListener("DOMContentLoaded", init);
     export let canvas: HTMLCanvasElement;
-    let crc: CanvasRenderingContext2D;
-    let fps: number = 30;
+    export let crc: CanvasRenderingContext2D;
+    let fps: number = 60;
+    let xShip: number = Math.random() * 1920;
     let imageData: ImageData;
     let fishArray: Fish[] = [];
+    let rainbowFishArray: RainbowFish[] = [];
+    let pufferfishArray: Pufferfish[] = [];
+    let bubblesArray: Bubbles[] = [];
 
     function init(): void {
         canvas = document.getElementsByTagName("canvas")[0];
         crc = canvas.getContext("2d");
-        // drawWater();
-        // for (let i: number = 0; i < 35; i++) {
-        //     let x: number = Math.random() * 1920;
-        //     let y: number = Math.random() * 100;
-        //     drawPlant(x, y);
-        // }
-        // drawSand();
-        // imageData = crc.getImageData(0, 0, canvas.width, canvas.height);
-        // for (let i: number = 0; i < 5; i++) {
-        //     let x: number = Math.random() * 1920;
-        //     let y: number = Math.random() * 30;        
-        //     drawStone(x, y);
-        // }
-        // let x: number = Math.random() * 1920;
-        // drawShip(x);
-        // for (let i: number = 0; i < 20; i++) {
-        //     let x: number = Math.random() * 1920;
-        //     let y: number = Math.random() * 800; 
-        //     drawFish(x, y);
-        // }
-        // for (let i: number = 0; i < 150; i++) {
-        //     let x: number = Math.random() * 1920;
-        //     let y: number = Math.random() * 1080; 
-        //     let size: number = Math.random() * 15;
-        //     drawBubbles(x, y, size);
-        // }
+        alert("VORSICHT: Epilepsie Warnung!");
+        drawWater();
+        for (let i: number = 0; i < 35; i++) {
+            let x: number = Math.random() * 1920;
+            let y: number = Math.random() * 100;
+            drawPlant(x, y);
+        }
+        drawSand();
+        for (let i: number = 0; i < 5; i++) {
+            let x: number = Math.random() * 1920;
+            let y: number = Math.random() * 30;        
+            drawStone(x, y);
+        }
+        drawShip(xShip);
+        imageData = crc.getImageData(0, 0, canvas.width, canvas.height);
+        for (let i: number = 0; i < 25; i++) {
+            let fish: Fish = new Fish;
+            let x: number = Math.random() * 1920;
+            let y: number = Math.random() * 800;
+            let dx: number = Math.random() * 10 - 5;
+            fish.x = x;
+            fish.y = y;
+            fish.dx = dx;
+            fishArray.push(fish);
+        }
+        for (let i: number = 0; i < 1; i++) {
+            let rainbowFish: RainbowFish = new RainbowFish;
+            let x: number = Math.random() * 1920;
+            let y: number = Math.random() * 800;
+            let dx: number = Math.random() * 30 - 15;
+            rainbowFish.x = x;
+            rainbowFish.y = y;
+            rainbowFish.dx = dx;
+            rainbowFishArray.push(rainbowFish);
+        }
+        for (let i: number = 0; i < 5; i++) {
+            let fish: Pufferfish = new Pufferfish;
+            let x: number = Math.random() * 1920;
+            let y: number = Math.random() * 800;
+            let dx: number = Math.random() * 6 - 3;
+            let size: number = Math.random() * 50;
+            fish.x = x;
+            fish.y = y;
+            fish.dx = dx;
+            fish.size = size;
+            pufferfishArray.push(fish);
+        }
+        update();
     }
 
     function update(): void {
         setTimeout(update, 1000 / fps);
-        crc.putImageData(imageData, 0, 0);
         crc.clearRect(0, 0, canvas.width, canvas.height);
+        crc.putImageData(imageData, 0, 0);  
 
-        let fish: Fish = new Fish;
-        fishArray.push(fish);
+        let bubble: Bubbles = new Bubbles;
+        let size: number = Math.random() * 15;
+        let transparency: number = Math.random();
+        let dx: number = Math.random() * 80 - 40;
+        bubble.x = xShip;
+        bubble.y = 850;
+        bubble.dx = dx;
+        bubble.dy = 3;
+        bubble.size = size;
+        bubble.transparency = transparency;
+        bubblesArray.push(bubble);
 
         for (let i: number = 0; i < fishArray.length; i++) {
             fishArray[i].update();
+        }
+        for (let i: number = 0; i < rainbowFishArray.length; i++) {
+            let red: number = Math.random() * 255;
+            let green: number = Math.random() * 255;
+            let blue: number = Math.random() * 255;
+            rainbowFishArray[i].red = red;
+            rainbowFishArray[i].green = green;
+            rainbowFishArray[i].blue = blue;
+            rainbowFishArray[i].update();
+        }
+        for (let i: number = 0; i < pufferfishArray.length; i++) {
+            pufferfishArray[i].update();
+        }
+        for (let i: number = 0; i < bubblesArray.length; i++) {
+            bubblesArray[i].update();
         }
     }
     
@@ -112,15 +162,6 @@ namespace t11 {
         stone.lineTo(_x + 60, 900);
         crc.fillStyle = "#949494";
         crc.fill(stone);
-    }
-    
-    function drawBubbles(_x: number, _y: number, _size: number): void {
-        let bubble: Path2D = new Path2D();
-        let transparency: number = Math.random();
-        bubble.arc(_x, _y, _size, 0, Math.PI * 2);
-        crc.fillStyle = `rgba(167, 211, 223, ${transparency})`;
-        crc.stroke();
-        crc.fill(bubble);
     }
     
     function drawShip(_x: number): void {

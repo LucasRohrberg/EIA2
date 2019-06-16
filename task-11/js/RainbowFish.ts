@@ -1,8 +1,11 @@
 namespace t11 {
-    export class Fish {
+    export class RainbowFish {
         x: number;
         y: number;
         dx: number;
+        red: number;
+        green: number;
+        blue: number;
     
         draw(): void {
             if (this.dx >= 0) {
@@ -15,8 +18,11 @@ namespace t11 {
                 fish.lineTo(this.x + 95, this.y);
                 fish.lineTo(this.x + 25, this.y - 8);
                 fish.closePath();
-                crc.fillStyle = "#9c5a24";
+                crc.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
                 crc.fill(fish);
+                crc.strokeStyle = "brown";
+                crc.lineWidth = 1;
+                crc.stroke(fish);
             
                 let fishFin: Path2D = new Path2D();
                 fishFin.moveTo(this.x + 90, this.y - 20);
@@ -24,7 +30,7 @@ namespace t11 {
                 fishFin.lineTo(this.x + 67, this.y - 10);
                 fishFin.lineTo(this.x + 90, this.y - 15);
                 fishFin.closePath();
-                crc.fillStyle = "#793e0f";
+                crc.fillStyle = "#dddddd";
                 crc.fill(fishFin);
             } else {
                 let fish: Path2D = new Path2D();
@@ -36,8 +42,11 @@ namespace t11 {
                 fish.lineTo(this.x - 95, this.y);
                 fish.lineTo(this.x - 25, this.y - 8);
                 fish.closePath();
-                crc.fillStyle = "#9c5a24";
+                crc.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
                 crc.fill(fish);
+                crc.strokeStyle = "brown";
+                crc.lineWidth = 1;
+                crc.stroke(fish);
             
                 let fishFin: Path2D = new Path2D();
                 fishFin.moveTo(this.x - 90, this.y - 20);
@@ -45,7 +54,7 @@ namespace t11 {
                 fishFin.lineTo(this.x - 67, this.y - 10);
                 fishFin.lineTo(this.x - 90, this.y - 15);
                 fishFin.closePath();
-                crc.fillStyle = "#793e0f";
+                crc.fillStyle = "#dddddd";
                 crc.fill(fishFin);
             }
         }
