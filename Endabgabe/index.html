@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/main.css">
+    <script src="js/Main.js"></script>
+    <title>Draw This!</title>
+</head>
+<body>
+    <header>
+
+    </header>
+
+    <main>
+        <div id="gameArea">
+            <div id="informationArea">
+                <span id="drawWord">Draw this word</span>
+            </div>
+            <div id="drawArea">
+                <canvas id="mainCanvas" width="960px" height="540px" id="canvas" style="border: 1px solid black"></canvas>
+            </div>
+            <div id="drawOptions">
+                <button id="clearCanvas">CLEAR</button>
+                <button id="undo">UNDO</button>
+                <button id="redo">REDO</button>
+                <button id="black" class="color">BLACK</button>
+                <button id="white" class="color">WHITE</button>
+                <button id="red" class="color">RED</button>
+                <button id="blue" class="color">BLUE</button>
+                <button id="yellow" class="color">YELLOW</button>
+                <button id="green" class="color">GREEN</button>
+            </div>
+            <div id="inputTextArea">
+                <input type="text" placeholder="Enter your guess here" height="50px">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>
