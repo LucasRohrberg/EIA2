@@ -1,19 +1,18 @@
-namespace t11 {
+namespace t12 {
     document.addEventListener("DOMContentLoaded", init);
     export let canvas: HTMLCanvasElement;
     export let crc: CanvasRenderingContext2D;
     let fps: number = 60;
-    let xShip: number = Math.random() * 1920;
+    let shipX: number = Math.random() * 1920;
     let imageData: ImageData;
-    let fishArray: Fish[] = [];
-    let rainbowFishArray: RainbowFish[] = [];
-    let pufferfishArray: Pufferfish[] = [];
-    let bubblesArray: Bubbles[] = [];
+    let thingsArray: Things[] = [];
 
     function init(): void {
+        document.getElementsByTagName("canvas")[0].addEventListener("click", spawnFood);
         canvas = document.getElementsByTagName("canvas")[0];
         crc = canvas.getContext("2d");
         alert("VORSICHT: Epilepsie Warnung!");
+        // start background
         drawWater();
         for (let i: number = 0; i < 35; i++) {
             let x: number = Math.random() * 1920;
@@ -26,39 +25,20 @@ namespace t11 {
             let y: number = Math.random() * 30;        
             drawStone(x, y);
         }
-        drawShip(xShip);
+        drawShip(shipX);
         imageData = crc.getImageData(0, 0, canvas.width, canvas.height);
+        // end background
         for (let i: number = 0; i < 25; i++) {
-            let fish: Fish = new Fish;
-            let x: number = Math.random() * 1920;
-            let y: number = Math.random() * 800;
-            let dx: number = Math.random() * 10 - 5;
-            fish.x = x;
-            fish.y = y;
-            fish.dx = dx;
-            fishArray.push(fish);
+            let fish: Fish = new Fish();
+            thingsArray.push(fish);
         }
         for (let i: number = 0; i < 1; i++) {
             let rainbowFish: RainbowFish = new RainbowFish;
-            let x: number = Math.random() * 1920;
-            let y: number = Math.random() * 800;
-            let dx: number = Math.random() * 30 - 15;
-            rainbowFish.x = x;
-            rainbowFish.y = y;
-            rainbowFish.dx = dx;
-            rainbowFishArray.push(rainbowFish);
+            thingsArray.push(rainbowFish);
         }
         for (let i: number = 0; i < 5; i++) {
             let fish: Pufferfish = new Pufferfish;
-            let x: number = Math.random() * 1920;
-            let y: number = Math.random() * 800;
-            let dx: number = Math.random() * 6 - 3;
-            let size: number = Math.random() * 50;
-            fish.x = x;
-            fish.y = y;
-            fish.dx = dx;
-            fish.size = size;
-            pufferfishArray.push(fish);
+            thingsArray.push(fish);
         }
         update();
     }
@@ -68,36 +48,17 @@ namespace t11 {
         crc.clearRect(0, 0, canvas.width, canvas.height);
         crc.putImageData(imageData, 0, 0);  
 
-        let bubble: Bubbles = new Bubbles;
-        let size: number = Math.random() * 15;
-        let transparency: number = Math.random();
-        let dx: number = Math.random() * 80 - 40;
-        bubble.x = xShip;
-        bubble.y = 850;
-        bubble.dx = dx;
-        bubble.dy = 3;
-        bubble.size = size;
-        bubble.transparency = transparency;
-        bubblesArray.push(bubble);
+        let bubble: Bubbles = new Bubbles(shipX);
+        thingsArray.push(bubble);
 
-        for (let i: number = 0; i < fishArray.length; i++) {
-            fishArray[i].update();
+        for (let i: number = 0; i < thingsArray.length; i++) {
+            thingsArray[i].update();
         }
-        for (let i: number = 0; i < rainbowFishArray.length; i++) {
-            let red: number = Math.random() * 255;
-            let green: number = Math.random() * 255;
-            let blue: number = Math.random() * 255;
-            rainbowFishArray[i].red = red;
-            rainbowFishArray[i].green = green;
-            rainbowFishArray[i].blue = blue;
-            rainbowFishArray[i].update();
-        }
-        for (let i: number = 0; i < pufferfishArray.length; i++) {
-            pufferfishArray[i].update();
-        }
-        for (let i: number = 0; i < bubblesArray.length; i++) {
-            bubblesArray[i].update();
-        }
+    }
+
+    function spawnFood(_event: MouseEvent): void {
+        let food: Food = new Food(_event.x, _event.y);
+        thingsArray.push(food);
     }
     
     function drawWater(): void {

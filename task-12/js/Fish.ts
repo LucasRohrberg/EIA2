@@ -1,8 +1,5 @@
-namespace t11 {
-    export class Fish {
-        x: number;
-        y: number;
-        dx: number;
+namespace t12 {
+    export class Fish extends Sealife {
     
         draw(): void {
             if (this.dx >= 0) {
@@ -48,18 +45,6 @@ namespace t11 {
                 crc.fillStyle = "#793e0f";
                 crc.fill(fishFin);
             }
-        }
-
-        move(): void {
-            this.x += this.dx;
-            if (this.x > 1930) this.x = -10;
-            if (this.x < -10) this.x = 1930;
-
-        }
-
-        update(): void {
-            this.move();
-            this.draw();
         }
     }
 }
