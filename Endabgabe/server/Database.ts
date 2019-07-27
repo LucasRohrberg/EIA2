@@ -30,9 +30,9 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
 }
 
 export function search(_callback: Function): void {
-    let length: number = Number(availableWords.count());
-    let randomNumber: number = Math.floor(Math.random() * length);
-    let cursor: Mongo.Cursor = availableWords.find({randomNumber});
+    let collectionLength: number = Number(availableWords.count());
+    let randomNumber: number = Math.floor(Math.random() * collectionLength - 1);
+    let cursor: Mongo.Cursor = availableWords.find().skip(randomNumber).limit(1);
     cursor.toArray(returnSearch);
 
     function returnSearch(_e: Mongo.MongoError, wordArray: WordData[]): void {

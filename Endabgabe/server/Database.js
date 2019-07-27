@@ -26,9 +26,9 @@ function handleConnect(_e, _client) {
     }
 }
 function search(_callback) {
-    let length = Number(availableWords.count());
-    let randomNumber = Math.floor(Math.random() * length);
-    let cursor = availableWords.find({ randomNumber });
+    let collectionLength = Number(availableWords.count());
+    let randomNumber = Math.floor(Math.random() * collectionLength - 1);
+    let cursor = availableWords.find().skip(randomNumber).limit(1);
     cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)
