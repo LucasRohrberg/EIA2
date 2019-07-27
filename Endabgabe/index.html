@@ -16,25 +16,29 @@
     <main>
         <div id="gameArea">
             <div id="informationArea">
-                <span id="drawWord">Draw this word</span>
+                <span id="drawWord">house</span>
             </div>
             <div id="drawArea">
                 <canvas id="mainCanvas" width="960px" height="540px" id="canvas" style="border: 1px solid black"></canvas>
             </div>
             <div id="drawOptions">
+                <button id="newWord">NEW</button>
                 <button id="clearCanvas">CLEAR</button>
-                <button id="undo">UNDO</button>
-                <button id="redo">REDO</button>
-                <button id="black" class="color">BLACK</button>
-                <button id="white" class="color">WHITE</button>
-                <button id="red" class="color">RED</button>
-                <button id="blue" class="color">BLUE</button>
-                <button id="yellow" class="color">YELLOW</button>
-                <button id="green" class="color">GREEN</button>
+                <button id="1" class="width">S</button>
+                <button id="5" class="width">M</button>
+                <button id="10" class="width">L</button>
+                <button id="black" class="color"></button>
+                <button id="white" class="color"></button>
+                <button id="red" class="color"></button>
+                <button id="green" class="color"></button>
+                <button id="blue" class="color"></button>
+                <button id="yellow" class="color"></button>
+                <button id="saddlebrown" class="color"></button>
             </div>
-            <div id="inputTextArea">
+            <div id="inputTextArea" style="display: none">
                 <input type="text" placeholder="Enter your guess here" height="50px">
             </div>
+            <button id="submit" type="submit">SUBMIT</button>
         </div>
     </main>
 

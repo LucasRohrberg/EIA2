@@ -19,7 +19,7 @@ main {
 }
 
 #informationArea {
-    margin-top: 100px;
+    margin-top: 20px;
     font-size: 30px;
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@ main {
 
 #inputTextArea > input {
     width: 960px;
-    height: 50px;
+    height: 40px;
     line-height: 30px;
     font-size: 30px;
 }
@@ -41,14 +41,23 @@ main {
 #drawOptions {
     display: flex;
     justify-content: space-evenly;
+    margin: 1% 0;
 }
 
-#drawOptions > button {
+#gameArea button {
     height: 35px;
     width: 150px;
     padding: 1% 0;
 }
 
+#gameArea > button {
+    width: 960px;
+}
+
 canvas {
     position: relative;
+}
+
+.border {
+    border: 3px solid black;
 }

@@ -1,7 +1,7 @@
 namespace Endabgabe {
     let canvas: HTMLCanvasElement;
     let crc: CanvasRenderingContext2D;
-    let clicked: boolean;
+    let clicked: boolean = false;
     let oldPosX: number;
     let oldPosY: number;
     let allButtons: HTMLCollectionOf<HTMLButtonElement> = document.getElementsByTagName("button");
@@ -16,8 +16,20 @@ namespace Endabgabe {
         crc = canvas.getContext("2d");
         document.getElementById("clearCanvas").addEventListener("click", clearCanvas);
         for (let i: number = 0; i < allButtons.length; i++) {
-            document.getElementsByClassName("color")[i].addEventListener("click", changeColor);
+            if (allButtons[i].className == "color") {
+                allButtons[i].addEventListener("click", changeColor);
+                allButtons[i].style.background = allButtons[i].id;
+            }
+            if (allButtons[i].className == "width") allButtons[i].addEventListener("click", changeWidth);
+            if (allButtons[i].id == "submitImage") allButtons[i].addEventListener("click", submit);
         }
+    }
+
+    function submit(): void {
+        if (document.getElementById("drawOptions").style.display == "none") document.getElementById("drawOptions").style.display = "flex";
+        else document.getElementById("drawOptions").style.display = "none";
+        if (document.getElementById("inputTextArea").style.display == "none") document.getElementById("inputTextArea").style.display = "flex";
+        else document.getElementById("inputTextArea").style.display = "none";
     }
 
     function clearCanvas(): void {
@@ -25,10 +37,22 @@ namespace Endabgabe {
     }
 
     function changeColor(_event: MouseEvent): void {
-        console.log(crc.strokeStyle);
+        for (let i: number = 0; i < allButtons.length; i++) {
+            if (allButtons[i].className == "border") {
+                allButtons[i].setAttribute("class", "color");
+            }
+        }
         let event: HTMLElement = <HTMLElement> _event.target;
         crc.strokeStyle = event.id;
-        console.log(crc.strokeStyle);
+        let attribute: Attr = document.createAttribute("class");
+        attribute.value = "border";
+        event.setAttributeNode(attribute);
+
+    }
+
+    function changeWidth(_event: MouseEvent): void {
+        let event: HTMLElement = <HTMLElement> _event.target;
+        crc.lineWidth = Number(event.id);
     }
 
     function mousedown(_event: MouseEvent): void {
@@ -59,5 +83,7 @@ namespace Endabgabe {
         dot.lineTo(_x, _y);
         dot.closePath();
         crc.stroke(dot);
+        // drawnPaths.push(dot);
+        // console.log(drawnPaths);
     }
 }

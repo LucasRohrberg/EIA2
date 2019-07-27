@@ -26,25 +26,12 @@ function handleRequest(_request: Http.IncomingMessage, _response: Http.ServerRes
     console.log("Request received");
 
     let query: AssocStringString = <AssocStringString> Url.parse(_request.url, true).query;
-    let command: string = query["command"]; // command aus url wird in command variable gespeichert, zB refresh oder insert
-    let gesuchteMatrikel: string = query["gesuchteMatrikel"];
+    let command: string = query["command"];
 
     switch (command) {
-        case "insert":
-            let student: StudentData = { // student objekt aus url in objekt übertragen
-                name: query["name"],
-                firstname: query["firstname"],
-                matrikel: parseInt(query["matrikel"])
-            };
-            Database.insert(student);
-            respond(_response, "storing data");
-            break;
-        case "search":
-            Database.search(gesuchteMatrikel, findCallback);
-            // respond(_response, "the following documents contain your configured matrikel");
-            break;
-        case "refresh":
-            Database.findAll(findCallback);
+        case "newWord":
+            Database.search(findCallback);
+            respond(_response, "getting new word");
             break;
         default:
             respond(_response, "unknown command: " + command);
@@ -63,6 +50,6 @@ function respond(_response: Http.ServerResponse, _json: string): void {
     //console.log("Preparing response: " + _text);
     _response.setHeader("Access-Control-Allow-Origin", "*");
     _response.setHeader("content-type", "text/html; charset=utf-8");
-    _response.write(_json); // "storing data" wird in z41 übergeben als _text, wird als response übergeben und als alert mit xhr.response ausgegeben
+    _response.write(_json);
     _response.end();
 }
