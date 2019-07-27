@@ -31,8 +31,8 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
 }
 
 export function search(_callback: Function): void {
-    let collectionLength: number = Number(availableWords.count());
-    let randomNumber: number = Math.floor(Math.random() * collectionLength - 1);
+    // let collectionLength: number = Number(availableWords.count());
+    // let randomNumber: number = Math.floor(Math.random() * collectionLength - 1);
     // let cursor: Mongo.Cursor = availableWords.find().skip(randomNumber).limit(1);
     // cursor.toArray(returnSearch);
 
@@ -43,10 +43,7 @@ export function search(_callback: Function): void {
         if (_e)
             _callback("Error" + _e);
         else {
-            console.log("full array: " + wordArray);
-            console.log("random slot: " + wordArray[randomNumber]);
-            let generatedWord: WordData = wordArray[randomNumber];
-            _callback(JSON.stringify(generatedWord));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }
