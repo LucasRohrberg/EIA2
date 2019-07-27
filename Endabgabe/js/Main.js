@@ -21,7 +21,7 @@ var Endabgabe;
             }
             if (allButtons[i].className == "width")
                 allButtons[i].addEventListener("click", changeWidth);
-            if (allButtons[i].id == "submitImage")
+            if (allButtons[i].id == "submit")
                 allButtons[i].addEventListener("click", submit);
         }
     }

@@ -32,27 +32,9 @@ function search(_callback) {
         if (_e)
             _callback("Error" + _e);
         else {
-            let randomWord = Math.floor(Math.random() * wordArray.length);
-            _callback(JSON.stringify(wordArray[randomWord]));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }
 exports.search = search;
-// // try to fetch all documents from database, then activate callback
-// export function findAll(_callback: Function): void {
-//     // cursor points to the retreived set of documents in memory
-//     let cursor: Mongo.Cursor = availableWords.find(); // Zeiger auf alle gefundenen Dokumente
-//     // try to convert to array, then activate callback "prepareAnswer"
-//     cursor.toArray(prepareAnswer); // fügt alle mit students.find() gefundenen Dokumente in ein Array hinzu // toArray erwartet callback Funktion
-//     console.log(cursor);
-//     // toArray-handler receives two standard parameters, an error object and the array
-//     // implemented as inner function, so _callback is in scope
-//     function prepareAnswer(_e: Mongo.MongoError, studentArray: WordData[]): void {
-//         if (_e)
-//             _callback("Error" + _e);
-//         else
-//             // stringify creates a json-string, passed it back to _callback
-//             _callback(JSON.stringify(studentArray));
-//     }
-// }
 //# sourceMappingURL=Database.js.map

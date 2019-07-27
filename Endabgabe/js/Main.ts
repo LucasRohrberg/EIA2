@@ -21,7 +21,7 @@ namespace Endabgabe {
                 allButtons[i].style.background = allButtons[i].id;
             }
             if (allButtons[i].className == "width") allButtons[i].addEventListener("click", changeWidth);
-            if (allButtons[i].id == "submitImage") allButtons[i].addEventListener("click", submit);
+            if (allButtons[i].id == "submit") allButtons[i].addEventListener("click", submit);
         }
     }
 
