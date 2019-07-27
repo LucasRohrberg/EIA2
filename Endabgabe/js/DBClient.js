@@ -1,7 +1,7 @@
 var Endabgabe;
 (function (Endabgabe) {
     window.addEventListener("DOMContentLoaded", init);
-    let serverAddress = "https://animedrawingquiz.herokuapp.com/";
+    let serverAddress = "https://endabgabedrawingquiz.herokuapp.com/";
     function init(_event) {
         console.log("Init works.");
         let newWordButton = document.getElementById("newWord");

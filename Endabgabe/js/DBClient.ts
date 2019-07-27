@@ -1,6 +1,6 @@
 namespace Endabgabe {
     window.addEventListener("DOMContentLoaded", init);
-    let serverAddress: string = "https://animedrawingquiz.herokuapp.com/";
+    let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
 
     function init(_event: Event): void {
         console.log("Init works.");
