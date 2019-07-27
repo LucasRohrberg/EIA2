@@ -28,15 +28,15 @@ function handleConnect(_e, _client) {
 function search(_callback) {
     let collectionLength = Number(availableWords.count());
     let randomNumber = Math.floor(Math.random() * collectionLength - 1);
-    // let cursor: Mongo.Cursor = availableWords.find().skip(randomNumber).limit(1);
-    // cursor.toArray(returnSearch);
-    let cursor = availableWords.find();
+    let cursor = availableWords.find().skip(randomNumber).limit(1);
     cursor.toArray(returnSearch);
+    // let cursor: Mongo.Cursor = availableWords.find();
+    // cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)
             _callback("Error" + _e);
         else {
-            _callback(JSON.stringify(wordArray[randomNumber]));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }
