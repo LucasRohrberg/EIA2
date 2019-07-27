@@ -7,13 +7,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Mongo = require("mongodb");
 console.log("Database starting");
 let databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
-let databaseName = "animedrawingquiz";
+let databaseName = "words";
 let db;
 let availableWords;
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
-    databaseName = "animedrawingquiz";
+    databaseName = "words";
 }
 // try to connect to database, then activate callback "handleConnect" 
 Mongo.MongoClient.connect(databaseURL, { connectTimeoutMS: 8000 }, handleConnect);

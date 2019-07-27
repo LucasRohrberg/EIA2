@@ -7,14 +7,14 @@ console.log("Database starting");
 
 let databaseURL: string = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
 
-let databaseName: string = "animedrawingquiz";
+let databaseName: string = "words";
 let db: Mongo.Db;
 let availableWords: Mongo.Collection;
 
 // running on heroku?
 if (process.env.NODE_ENV == "production") {
     databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
-    databaseName = "animedrawingquiz";
+    databaseName = "words";
 }
 
 // try to connect to database, then activate callback "handleConnect" 
