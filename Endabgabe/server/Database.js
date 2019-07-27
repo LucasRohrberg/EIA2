@@ -15,15 +15,13 @@ if (process.env.NODE_ENV == "production") {
     databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
     databaseName = "words";
 }
-// try to connect to database, then activate callback "handleConnect" 
 Mongo.MongoClient.connect(databaseURL, { connectTimeoutMS: 8000 }, handleConnect);
-// connect-handler receives two standard parameters, an error object and a database client object
 function handleConnect(_e, _client) {
     if (_e)
         console.log("Unable to connect to database, error: ", _e);
     else {
         console.log("Connected to database!");
-        db = _client.db(databaseName); // wenn erfolgreich verbunden, dann liest er die gewünschte datenbank aus und speicherts in db
+        db = _client.db(databaseName);
         availableWords = db.collection("basic");
     }
 }
