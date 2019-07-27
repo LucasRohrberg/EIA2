@@ -25,7 +25,6 @@ namespace Endabgabe {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output: HTMLSpanElement = document.getElementById("drawWord");
             // console.log(xhr.response);
-            console.log(xhr.response[1]);
             output.innerText = xhr.response;
         }
     }

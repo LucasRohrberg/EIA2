@@ -26,17 +26,15 @@ function handleConnect(_e, _client) {
     }
 }
 function search(_callback) {
-    // let collectionLength: number = Number(availableWords.count());
-    // let randomNumber: number = Math.floor(Math.random() * collectionLength - 1);
-    // let cursor: Mongo.Cursor = availableWords.find().skip(randomNumber).limit(1);
-    // cursor.toArray(returnSearch);
+    let collectionLength = Number(availableWords.count());
+    let randomNumber = Math.floor(Math.random() * collectionLength - 1);
     let cursor = availableWords.find();
     cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)
             _callback("Error" + _e);
         else {
-            _callback(JSON.stringify(wordArray));
+            _callback(JSON.stringify(wordArray[randomNumber]));
         }
     }
 }
