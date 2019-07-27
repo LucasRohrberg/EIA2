@@ -26,7 +26,9 @@ function handleConnect(_e, _client) {
     }
 }
 function search(_callback) {
-    let cursor = availableWords.find();
+    let length = Number(availableWords.count());
+    let randomNumber = Math.floor(Math.random() * length);
+    let cursor = availableWords.find({ randomNumber });
     cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)

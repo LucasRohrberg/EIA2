@@ -22,9 +22,7 @@ var Endabgabe;
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output = document.getElementById("drawWord");
             console.log(xhr.response);
-            let randomNumber = Math.random() * 10;
-            let newResponse = xhr.response[randomNumber];
-            output.innerText = newResponse;
+            output.innerText = xhr.response;
         }
     }
 })(Endabgabe || (Endabgabe = {}));

@@ -25,9 +25,7 @@ namespace Endabgabe {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output: HTMLSpanElement = document.getElementById("drawWord");
             console.log(xhr.response);
-            let randomNumber: number = Math.random() * 10;
-            let newResponse: string = xhr.response[randomNumber];
-            output.innerText = newResponse;
+            output.innerText = xhr.response;
         }
     }
 }
