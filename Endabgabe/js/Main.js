@@ -37,7 +37,7 @@ var Endabgabe;
             let guessedInput = document.getElementById("guess");
             let guessedWord = guessedInput.value;
             crc.strokeStyle = "none";
-            if (guessedWord == wordUsed) {
+            if (guessedWord.toLowerCase() == wordUsed.toLowerCase()) {
                 alert("Congratulations, your guess was correct!");
                 document.getElementById("drawOptions").style.display = "flex";
                 document.getElementById("inputTextArea").style.display = "none";
