@@ -11,6 +11,7 @@ namespace Endabgabe {
     document.addEventListener("mousedown", mousedown);
     document.addEventListener("mouseup", mouseup);
     document.addEventListener("mousemove", mousemove);
+    document.addEventListener("keydown", submit2);
 
     function init(): void {
         canvas = document.getElementsByTagName("canvas")[0];
@@ -42,6 +43,27 @@ namespace Endabgabe {
             document.getElementById("inputTextArea").style.display = "flex";
             document.getElementById("drawWord").style.display = "none";
             document.getElementById("drawOptions").style.display = "none";
+        }
+    }
+
+    function submit2(_event: KeyboardEvent): void {
+        if (_event.keyCode == 13) {
+            if (document.getElementById("drawOptions").style.display == "none") { //guessing
+                let guessedInput: HTMLInputElement = <HTMLInputElement> document.getElementById("guess");
+                let guessedWord: string = guessedInput.value;
+                console.log("guessedWord: " + guessedWord);
+                if (guessedWord == wordUsed) {
+                    alert("Congratulations, you guessed correctly!");
+                    location.reload();
+                }
+            }
+            if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+                wordUsed = document.getElementById("drawWord").innerText;
+                console.log("wordUsed: " + wordUsed);
+                document.getElementById("inputTextArea").style.display = "flex";
+                document.getElementById("drawWord").style.display = "none";
+                document.getElementById("drawOptions").style.display = "none";
+            }
         }
     }
 
