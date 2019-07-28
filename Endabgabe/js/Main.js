@@ -36,6 +36,9 @@ var Endabgabe;
                 alert("Congratulations, you guessed correctly!");
                 location.reload();
             }
+            else {
+                document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
+            }
         }
         if (document.getElementById("inputTextArea").style.display == "none") { //drawing
             wordUsed = document.getElementById("drawWord").innerText;
@@ -54,6 +57,9 @@ var Endabgabe;
                 if (guessedWord == wordUsed) {
                     alert("Congratulations, you guessed correctly!");
                     location.reload();
+                }
+                else {
+                    document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
                 }
             }
             if (document.getElementById("inputTextArea").style.display == "none") { //drawing

@@ -35,6 +35,8 @@ namespace Endabgabe {
             if (guessedWord == wordUsed) {
                 alert("Congratulations, you guessed correctly!");
                 location.reload();
+            } else {
+                document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
             }
         }
         if (document.getElementById("inputTextArea").style.display == "none") { //drawing
@@ -55,6 +57,8 @@ namespace Endabgabe {
                 if (guessedWord == wordUsed) {
                     alert("Congratulations, you guessed correctly!");
                     location.reload();
+                } else {
+                    document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
                 }
             }
             if (document.getElementById("inputTextArea").style.display == "none") { //drawing
