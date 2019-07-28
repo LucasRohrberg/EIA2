@@ -14,6 +14,10 @@ main {
     justify-content: center;
 }
 
+input {
+    color: #1b1b1b;
+}
+
 canvas {
     background: #ffffff;
 }
