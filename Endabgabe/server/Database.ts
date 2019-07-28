@@ -26,7 +26,9 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
     else {
         console.log("Connected to database!");
         db = _client.db(databaseName);
-        availableWords = db.collection("basic");
+        let databaseLength: number = db.listCollections.length;
+        let randomCollection: number = Math.floor(Math.random() * databaseLength - 1);
+        availableWords = db.collection(`${randomCollection}`);
     }
 }
 
@@ -38,9 +40,7 @@ export function search(_callback: Function): void {
         if (_e)
         _callback("Error" + _e);
         else {
-            let collectionLength: number = Number(availableWords.count());
-            let randomNumber: number = Math.floor(Math.random() * collectionLength - 1);
-            _callback((wordArray[randomNumber]));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }

@@ -22,7 +22,9 @@ function handleConnect(_e, _client) {
     else {
         console.log("Connected to database!");
         db = _client.db(databaseName);
-        availableWords = db.collection("basic");
+        let databaseLength = db.listCollections.length;
+        let randomCollection = Math.floor(Math.random() * databaseLength - 1);
+        availableWords = db.collection(`${randomCollection}`);
     }
 }
 function search(_callback) {
@@ -32,9 +34,7 @@ function search(_callback) {
         if (_e)
             _callback("Error" + _e);
         else {
-            let collectionLength = Number(availableWords.count());
-            let randomNumber = Math.floor(Math.random() * collectionLength - 1);
-            _callback((wordArray[randomNumber]));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }
