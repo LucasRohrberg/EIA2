@@ -1,6 +1,7 @@
 namespace Endabgabe {
     window.addEventListener("DOMContentLoaded", init);
-    let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
+    // let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
+    let serverAddress: string = "http://localhost:8100/";
 
     function init(_event: Event): void {
         console.log("Init works.");
@@ -24,7 +25,6 @@ namespace Endabgabe {
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output: HTMLSpanElement = document.getElementById("drawWord");
-            // console.log(xhr.response);
             output.innerText = xhr.response;
         }
     }

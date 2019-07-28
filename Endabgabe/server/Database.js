@@ -7,6 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Mongo = require("mongodb");
 console.log("Database starting");
 let databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
+let splitWordsArray;
 let databaseName = "words";
 let db;
 let availableWords;
@@ -22,19 +23,22 @@ function handleConnect(_e, _client) {
     else {
         console.log("Connected to database!");
         db = _client.db(databaseName);
-        let databaseLength = db.listCollections.length;
-        let randomCollection = Math.floor(Math.random() * databaseLength - 1);
-        availableWords = db.collection(`5`);
+        availableWords = db.collection("basic");
     }
 }
 function search(_callback) {
     let cursor = availableWords.find();
+    let splitArray;
     cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)
             _callback("Error" + _e);
         else {
-            _callback(JSON.stringify(wordArray));
+            wordArray.forEach(seperateWords);
+            function seperateWords(_element) {
+                splitArray.push(_element);
+            }
+            _callback(JSON.stringify(splitArray));
         }
     }
 }

@@ -7,6 +7,7 @@ import { cursorTo } from "readline";
 console.log("Database starting");
 
 let databaseURL: string = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
+let splitWordsArray: WordData[];
 
 let databaseName: string = "words";
 let db: Mongo.Db;
@@ -26,21 +27,24 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
     else {
         console.log("Connected to database!");
         db = _client.db(databaseName);
-        let databaseLength: number = db.listCollections.length;
-        let randomCollection: number = Math.floor(Math.random() * databaseLength - 1);
-        availableWords = db.collection(`5`);
+        availableWords = db.collection("basic");
     }
 }
 
 export function search(_callback: Function): void {
     let cursor: Mongo.Cursor = availableWords.find();
+    let splitArray: WordData[];
     cursor.toArray(returnSearch);
     
     function returnSearch(_e: Mongo.MongoError, wordArray: WordData[]): void {
         if (_e)
         _callback("Error" + _e);
         else {
-            _callback(JSON.stringify(wordArray));
+            wordArray.forEach(seperateWords);
+            function seperateWords(_element: WordData): void {
+                splitArray.push(_element);
+            }
+            _callback(JSON.stringify(splitArray));
         }
     }
 }

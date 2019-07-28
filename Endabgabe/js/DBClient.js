@@ -1,7 +1,8 @@
 var Endabgabe;
 (function (Endabgabe) {
     window.addEventListener("DOMContentLoaded", init);
-    let serverAddress = "https://endabgabedrawingquiz.herokuapp.com/";
+    // let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
+    let serverAddress = "http://localhost:8100/";
     function init(_event) {
         console.log("Init works.");
         let newWordButton = document.getElementById("newWord");
@@ -21,7 +22,6 @@ var Endabgabe;
         let xhr = _event.target;
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output = document.getElementById("drawWord");
-            // console.log(xhr.response);
             output.innerText = xhr.response;
         }
     }
