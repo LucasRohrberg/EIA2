@@ -28,17 +28,12 @@ function handleConnect(_e, _client) {
 }
 function search(_callback) {
     let cursor = availableWords.find();
-    let splitArray;
     cursor.toArray(returnSearch);
     function returnSearch(_e, wordArray) {
         if (_e)
             _callback("Error" + _e);
         else {
-            wordArray.forEach(seperateWords);
-            function seperateWords(_element) {
-                splitArray.push(_element);
-            }
-            _callback(JSON.stringify(splitArray));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }

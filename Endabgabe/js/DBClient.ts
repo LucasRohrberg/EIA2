@@ -1,7 +1,7 @@
 namespace Endabgabe {
     window.addEventListener("DOMContentLoaded", init);
-    // let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
-    let serverAddress: string = "http://localhost:8100/";
+    let serverAddress: string = "https://endabgabedrawingquiz.herokuapp.com/";
+    // let serverAddress: string = "http://localhost:8100/";
 
     function init(_event: Event): void {
         console.log("Init works.");
@@ -25,7 +25,35 @@ namespace Endabgabe {
         let xhr: XMLHttpRequest = (<XMLHttpRequest>_event.target);
         if (xhr.readyState == XMLHttpRequest.DONE) {
             let output: HTMLSpanElement = document.getElementById("drawWord");
-            output.innerText = xhr.response;
+            let responseString: string = xhr.response;
+            console.log(responseString);
+            let seperatedString: string[] = responseString.split(`,`);
+            seperatedString = seperatedString.toString().split(`[{`);
+            seperatedString = seperatedString.toString().split(`}]`);
+            seperatedString = seperatedString.toString().split(`:`);
+            seperatedString = seperatedString.toString().split(` `);
+            seperatedString = seperatedString.toString().split(`"`);
+            seperatedString = seperatedString.toString().split(`,`);
+            for (let i: number = 0; i < seperatedString.length; i++) {
+                for (let j: number = 0; j < seperatedString.length; j++) {
+                    if (seperatedString[i] == "") {
+                        seperatedString.splice(i, 1);
+                    }
+                    if (seperatedString[i] == String(j)) {
+                        seperatedString.splice(i, 1);
+                    }
+                }
+            }
+            for (let i: number = 0; i < seperatedString.length; i++) {
+                if (seperatedString[i] == "") {
+                    seperatedString.splice(i, 1);
+                }
+            }
+            seperatedString.splice(seperatedString.length - 2, 2);
+            console.log(seperatedString);
+            let randomNumber: number = Math.floor(Math.random() * seperatedString.length);
+            console.log(randomNumber);
+            output.innerText = seperatedString[randomNumber];
         }
     }
 }

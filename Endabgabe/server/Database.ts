@@ -33,18 +33,13 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
 
 export function search(_callback: Function): void {
     let cursor: Mongo.Cursor = availableWords.find();
-    let splitArray: WordData[];
     cursor.toArray(returnSearch);
     
     function returnSearch(_e: Mongo.MongoError, wordArray: WordData[]): void {
         if (_e)
         _callback("Error" + _e);
         else {
-            wordArray.forEach(seperateWords);
-            function seperateWords(_element: WordData): void {
-                splitArray.push(_element);
-            }
-            _callback(JSON.stringify(splitArray));
+            _callback(JSON.stringify(wordArray));
         }
     }
 }

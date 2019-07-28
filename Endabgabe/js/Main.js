@@ -6,6 +6,7 @@ var Endabgabe;
     let oldPosX;
     let oldPosY;
     let allButtons = document.getElementsByTagName("button");
+    let wordUsed;
     document.addEventListener("DOMContentLoaded", init);
     document.addEventListener("mousedown", mousedown);
     document.addEventListener("mouseup", mouseup);
@@ -26,14 +27,22 @@ var Endabgabe;
         }
     }
     function submit() {
-        if (document.getElementById("drawOptions").style.display == "none")
-            document.getElementById("drawOptions").style.display = "flex";
-        else
-            document.getElementById("drawOptions").style.display = "none";
-        if (document.getElementById("inputTextArea").style.display == "none")
+        if (document.getElementById("drawOptions").style.display == "none") { //guessing
+            let guessedInput = document.getElementById("guess");
+            let guessedWord = guessedInput.value;
+            console.log("guessedWord: " + guessedWord);
+            if (guessedWord == wordUsed) {
+                alert("Congratulations, you guessed correctly!");
+                location.reload();
+            }
+        }
+        if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+            wordUsed = document.getElementById("drawWord").innerText;
+            console.log("wordUsed: " + wordUsed);
             document.getElementById("inputTextArea").style.display = "flex";
-        else
-            document.getElementById("inputTextArea").style.display = "none";
+            document.getElementById("drawWord").style.display = "none";
+            document.getElementById("drawOptions").style.display = "none";
+        }
     }
     function clearCanvas() {
         crc.clearRect(0, 0, canvas.width, canvas.height);

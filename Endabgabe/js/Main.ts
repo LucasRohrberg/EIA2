@@ -5,6 +5,7 @@ namespace Endabgabe {
     let oldPosX: number;
     let oldPosY: number;
     let allButtons: HTMLCollectionOf<HTMLButtonElement> = document.getElementsByTagName("button");
+    let wordUsed: string;
 
     document.addEventListener("DOMContentLoaded", init);
     document.addEventListener("mousedown", mousedown);
@@ -26,10 +27,22 @@ namespace Endabgabe {
     }
 
     function submit(): void {
-        if (document.getElementById("drawOptions").style.display == "none") document.getElementById("drawOptions").style.display = "flex";
-        else document.getElementById("drawOptions").style.display = "none";
-        if (document.getElementById("inputTextArea").style.display == "none") document.getElementById("inputTextArea").style.display = "flex";
-        else document.getElementById("inputTextArea").style.display = "none";
+        if (document.getElementById("drawOptions").style.display == "none") { //guessing
+            let guessedInput: HTMLInputElement = <HTMLInputElement> document.getElementById("guess");
+            let guessedWord: string = guessedInput.value;
+            console.log("guessedWord: " + guessedWord);
+            if (guessedWord == wordUsed) {
+                alert("Congratulations, you guessed correctly!");
+                location.reload();
+            }
+        }
+        if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+            wordUsed = document.getElementById("drawWord").innerText;
+            console.log("wordUsed: " + wordUsed);
+            document.getElementById("inputTextArea").style.display = "flex";
+            document.getElementById("drawWord").style.display = "none";
+            document.getElementById("drawOptions").style.display = "none";
+        }
     }
 
     function clearCanvas(): void {
