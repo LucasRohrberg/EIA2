@@ -8,6 +8,14 @@ main {
     justify-content: center;
 }
 
+#previouslyGuessedWords {
+    position: absolute;
+    font-size: 15px;
+    overflow: scroll;
+    height: 300px;
+    width: 150px;
+}
+
 #gameArea {
     width: 960px;
 }
