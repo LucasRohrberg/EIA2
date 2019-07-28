@@ -22,9 +22,10 @@ var Endabgabe;
                 allButtons[i].addEventListener("click", changeColor);
                 allButtons[i].style.background = allButtons[i].id;
             }
-            if (allButtons[i].className == "width")
+            else if (allButtons[i].className == "width") {
                 allButtons[i].addEventListener("click", changeWidth);
-            if (allButtons[i].id == "submit")
+            }
+            else if (allButtons[i].id == "submit")
                 allButtons[i].addEventListener("click", submit);
         }
     }
@@ -36,7 +37,6 @@ var Endabgabe;
         if (document.getElementById("drawOptions").style.display == "none") { //guessing
             let guessedInput = document.getElementById("guess");
             let guessedWord = guessedInput.value;
-            crc.strokeStyle = "none";
             if (guessedWord.toLowerCase() == wordUsed.toLowerCase()) {
                 alert("Congratulations, your guess was correct!");
                 document.getElementById("drawOptions").style.display = "flex";
@@ -45,13 +45,12 @@ var Endabgabe;
                 document.getElementById("correctlyGuessedWords").innerText += `${wordUsed}\n`;
                 Endabgabe.getNewWord();
                 drawing = true;
-                return;
             }
             else {
                 document.getElementById("attemptedGuesses").innerText += `${guessedWord}\n`;
             }
         }
-        if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+        else if (document.getElementById("inputTextArea").style.display == "none") { //drawing
             wordUsed = document.getElementById("drawWord").innerText;
             drawing = false;
             document.getElementById("inputTextArea").style.display = "flex";
@@ -75,8 +74,16 @@ var Endabgabe;
         event.setAttributeNode(attribute);
     }
     function changeWidth(_event) {
+        for (let i = 0; i < allButtons.length; i++) {
+            if (allButtons[i].className == "border") {
+                allButtons[i].setAttribute("class", "width");
+            }
+        }
         let event = _event.target;
         crc.lineWidth = Number(event.id);
+        let attribute = document.createAttribute("class");
+        attribute.value = "border";
+        event.setAttributeNode(attribute);
     }
     function mousedown(_event) {
         clicked = true;
@@ -87,15 +94,13 @@ var Endabgabe;
         clicked = false;
     }
     function mousemove(_event) {
-        if (drawing == true) {
+        if (drawing == true && clicked == true) {
             let event = _event.target;
-            if (clicked == true) {
-                if (event.id == "mainCanvas") {
-                    draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
-                    oldPosX = _event.offsetX;
-                    oldPosY = _event.offsetY;
-                    console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
-                }
+            if (event.id == "mainCanvas") {
+                draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
+                oldPosX = _event.offsetX;
+                oldPosY = _event.offsetY;
+                console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
             }
         }
     }

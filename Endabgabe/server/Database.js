@@ -7,7 +7,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Mongo = require("mongodb");
 console.log("Database starting");
 let databaseURL = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
-let splitWordsArray;
 let databaseName = "words";
 let db;
 let availableWords;

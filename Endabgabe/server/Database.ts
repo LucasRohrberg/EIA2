@@ -7,7 +7,6 @@ import { cursorTo } from "readline";
 console.log("Database starting");
 
 let databaseURL: string = "mongodb+srv://user_name:user_password@animedrawingquiz-zbvub.mongodb.net/test";
-let splitWordsArray: WordData[];
 
 let databaseName: string = "words";
 let db: Mongo.Db;

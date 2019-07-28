@@ -22,9 +22,9 @@ namespace Endabgabe {
             if (allButtons[i].className == "color") {
                 allButtons[i].addEventListener("click", changeColor);
                 allButtons[i].style.background = allButtons[i].id;
-            }
-            if (allButtons[i].className == "width") allButtons[i].addEventListener("click", changeWidth);
-            if (allButtons[i].id == "submit") allButtons[i].addEventListener("click", submit);
+            } else if (allButtons[i].className == "width") { 
+                allButtons[i].addEventListener("click", changeWidth);
+            } else if (allButtons[i].id == "submit") allButtons[i].addEventListener("click", submit);
         }
     }
 
@@ -36,7 +36,6 @@ namespace Endabgabe {
         if (document.getElementById("drawOptions").style.display == "none") { //guessing
             let guessedInput: HTMLInputElement = <HTMLInputElement> document.getElementById("guess");
             let guessedWord: string = guessedInput.value;
-            crc.strokeStyle = "none";
             if (guessedWord.toLowerCase() == wordUsed.toLowerCase()) {
                 alert("Congratulations, your guess was correct!");
                 document.getElementById("drawOptions").style.display = "flex";
@@ -45,13 +44,11 @@ namespace Endabgabe {
                 document.getElementById("correctlyGuessedWords").innerText += `${wordUsed}\n`;
                 getNewWord();
                 drawing = true;
-                return;
 
             } else {
                 document.getElementById("attemptedGuesses").innerText += `${guessedWord}\n`;
             }
-        }
-        if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+        } else if (document.getElementById("inputTextArea").style.display == "none") { //drawing
             wordUsed = document.getElementById("drawWord").innerText;
             drawing = false;
             document.getElementById("inputTextArea").style.display = "flex";
@@ -79,8 +76,16 @@ namespace Endabgabe {
     }
 
     function changeWidth(_event: MouseEvent): void {
+        for (let i: number = 0; i < allButtons.length; i++) {
+            if (allButtons[i].className == "border") {
+                allButtons[i].setAttribute("class", "width");
+            }
+        }
         let event: HTMLElement = <HTMLElement> _event.target;
         crc.lineWidth = Number(event.id);
+        let attribute: Attr = document.createAttribute("class");
+        attribute.value = "border";
+        event.setAttributeNode(attribute);
     }
 
     function mousedown(_event: MouseEvent): void {
@@ -94,15 +99,13 @@ namespace Endabgabe {
     }
 
     function mousemove(_event: MouseEvent): void {
-        if (drawing == true) {
+        if (drawing == true && clicked == true) {
             let event: HTMLElement = <HTMLElement> _event.target;
-            if (clicked == true) {
-                if (event.id == "mainCanvas") {
-                    draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
-                    oldPosX = _event.offsetX;
-                    oldPosY = _event.offsetY;
-                    console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
-                }
+            if (event.id == "mainCanvas") {
+                draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
+                oldPosX = _event.offsetX;
+                oldPosY = _event.offsetY;
+                console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
             }
         }
     }
