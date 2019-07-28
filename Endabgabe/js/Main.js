@@ -43,8 +43,9 @@ var Endabgabe;
                 document.getElementById("inputTextArea").style.display = "none";
                 document.getElementById("drawWord").style.display = "block";
                 document.getElementById("correctlyGuessedWords").innerText += `${wordUsed}\n`;
-                Endabgabe.getNewWord();
                 drawing = true;
+                clearCanvas();
+                Endabgabe.getNewWord();
             }
             else {
                 document.getElementById("attemptedGuesses").innerText += `${guessedWord}\n`;
