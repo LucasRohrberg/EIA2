@@ -16,21 +16,18 @@
     </header>
 
     <main>
-        <div id="attemptedGuesses">
-            <p>Attempted Guesses:<br></p>
-        </div>
-        <div id="correctlyGuessedWords">
-            <p>Correctly Guessed:<br></p>
+        <div id="previouslyGuessedWords">
+            <p>Previously Guessed:</p>
         </div>
         <div id="gameArea">
             <div id="informationArea">
-                <span id="drawWord"></span>
+                <span id="drawWord">Draw This Word</span>
             </div>
             <div id="drawArea">
                 <canvas id="mainCanvas" width="960px" height="540px" id="canvas" style="border: 1px solid black"></canvas>
             </div>
             <div id="drawOptions">
-                <button id="newWord">NEXT</button>
+                <button id="newWord">NEW</button>
                 <button id="clearCanvas">CLEAR</button>
                 <button id="1" class="width">S</button>
                 <button id="5" class="width">M</button>
@@ -46,7 +43,7 @@
             <div id="inputTextArea" style="display: none">
                 <input type="text" id="guess" placeholder="Enter your guess here" height="50px">
             </div>
-            <button id="submit" type="submit">PRESS THIS BUTTON OR [ENTER] TO SUBMIT YOUR DRAWING/GUESS</button>
+            <button id="submit" type="submit">SUBMIT</button>
         </div>
     </main>
 

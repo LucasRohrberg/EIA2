@@ -3,7 +3,6 @@ var Endabgabe;
     let canvas;
     let crc;
     let clicked = false;
-    let drawing = true;
     let oldPosX;
     let oldPosY;
     let allButtons = document.getElementsByTagName("button");
@@ -12,7 +11,7 @@ var Endabgabe;
     document.addEventListener("mousedown", mousedown);
     document.addEventListener("mouseup", mouseup);
     document.addEventListener("mousemove", mousemove);
-    document.addEventListener("keydown", handleKeydown);
+    document.addEventListener("keydown", submit2);
     function init() {
         canvas = document.getElementsByTagName("canvas")[0];
         crc = canvas.getContext("2d");
@@ -28,35 +27,48 @@ var Endabgabe;
                 allButtons[i].addEventListener("click", submit);
         }
     }
-    function handleKeydown(_event) {
-        if (_event.keyCode == 13)
-            submit();
-    }
     function submit() {
         if (document.getElementById("drawOptions").style.display == "none") { //guessing
             let guessedInput = document.getElementById("guess");
             let guessedWord = guessedInput.value;
-            crc.strokeStyle = "none";
+            console.log("guessedWord: " + guessedWord);
             if (guessedWord == wordUsed) {
-                alert("Congratulations, your guess was correct!");
-                document.getElementById("drawOptions").style.display = "flex";
-                document.getElementById("inputTextArea").style.display = "none";
-                document.getElementById("drawWord").style.display = "block";
-                document.getElementById("correctlyGuessedWords").innerText += `${wordUsed}\n`;
-                Endabgabe.getNewWord();
-                drawing = true;
-                return;
+                alert("Congratulations, you guessed correctly!");
+                location.reload();
             }
             else {
-                document.getElementById("attemptedGuesses").innerText += `${guessedWord}\n`;
+                document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
             }
         }
         if (document.getElementById("inputTextArea").style.display == "none") { //drawing
             wordUsed = document.getElementById("drawWord").innerText;
-            drawing = false;
+            console.log("wordUsed: " + wordUsed);
             document.getElementById("inputTextArea").style.display = "flex";
             document.getElementById("drawWord").style.display = "none";
             document.getElementById("drawOptions").style.display = "none";
+        }
+    }
+    function submit2(_event) {
+        if (_event.keyCode == 13) {
+            if (document.getElementById("drawOptions").style.display == "none") { //guessing
+                let guessedInput = document.getElementById("guess");
+                let guessedWord = guessedInput.value;
+                console.log("guessedWord: " + guessedWord);
+                if (guessedWord == wordUsed) {
+                    alert("Congratulations, you guessed correctly!");
+                    location.reload();
+                }
+                else {
+                    document.getElementById("previouslyGuessedWords").innerText += `${guessedWord}\n`;
+                }
+            }
+            if (document.getElementById("inputTextArea").style.display == "none") { //drawing
+                wordUsed = document.getElementById("drawWord").innerText;
+                console.log("wordUsed: " + wordUsed);
+                document.getElementById("inputTextArea").style.display = "flex";
+                document.getElementById("drawWord").style.display = "none";
+                document.getElementById("drawOptions").style.display = "none";
+            }
         }
     }
     function clearCanvas() {
@@ -87,15 +99,13 @@ var Endabgabe;
         clicked = false;
     }
     function mousemove(_event) {
-        if (drawing == true) {
-            let event = _event.target;
-            if (clicked == true) {
-                if (event.id == "mainCanvas") {
-                    draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
-                    oldPosX = _event.offsetX;
-                    oldPosY = _event.offsetY;
-                    console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
-                }
+        let event = _event.target;
+        if (clicked == true) {
+            if (event.id == "mainCanvas") {
+                draw(_event.offsetX, _event.offsetY, oldPosX, oldPosY);
+                oldPosX = _event.offsetX;
+                oldPosY = _event.offsetY;
+                console.log("X: " + _event.offsetX + " Y: " + _event.offsetY);
             }
         }
     }
@@ -105,7 +115,6 @@ var Endabgabe;
         dot.lineTo(_x, _y);
         dot.closePath();
         crc.stroke(dot);
-        // attempt at an undo/redo functionality, but storing the path in an array messed up the path
         // drawnPaths.push(dot);
         // console.log(drawnPaths);
     }

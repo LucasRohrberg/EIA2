@@ -29,7 +29,7 @@ button {
     background: #3f2222;
 }
 
-#attemptedGuesses {
+#previouslyGuessedWords {
     position: absolute;
     font-size: 15px;
     height: 50vh;
@@ -39,19 +39,10 @@ button {
     top: 80px;
     text-align: right;
     color: #ffffff;
-    overflow: hidden;
 }
 
-#correctlyGuessedWords {
-    position: absolute;
-    font-size: 15px;
-    height: 50vh;
-    width: 200px;
-    display: block;
-    left: 50px;
-    top: 80px;
-    color: #ffffff;
-    overflow: hidden;
+#previouslyGuessedWords > p {
+    text-align: center;
 }
 
 #gameArea {

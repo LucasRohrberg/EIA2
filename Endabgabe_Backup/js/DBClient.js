@@ -3,20 +3,15 @@ var Endabgabe;
     window.addEventListener("DOMContentLoaded", init);
     let serverAddress = "https://endabgabedrawingquiz.herokuapp.com/";
     // let serverAddress: string = "http://localhost:8100/";
-    let previousRandomNumbers = [];
-    let randomNumber;
     function init(_event) {
         console.log("Init works.");
         let newWordButton = document.getElementById("newWord");
         newWordButton.addEventListener("click", getNewWord);
+    }
+    function getNewWord(_event) {
         let query = "command=newWord";
         sendRequest(query, handleFindResponse);
     }
-    function getNewWord() {
-        let query = "command=newWord";
-        sendRequest(query, handleFindResponse);
-    }
-    Endabgabe.getNewWord = getNewWord;
     function sendRequest(_query, _callback) {
         let xhr = new XMLHttpRequest();
         xhr.open("GET", serverAddress + "?" + _query, true);
@@ -53,21 +48,7 @@ var Endabgabe;
             }
             seperatedString.splice(seperatedString.length - 2, 2);
             console.log(seperatedString);
-            function generateRandomNumber() {
-                randomNumber = Math.floor(Math.random() * seperatedString.length);
-                if (previousRandomNumbers.length == seperatedString.length) {
-                    alert("You used up every available word. Thanks for playing! <3");
-                    location.reload();
-                }
-                else if (previousRandomNumbers.includes(randomNumber)) {
-                    generateRandomNumber();
-                }
-                else {
-                    previousRandomNumbers.push(randomNumber);
-                }
-            }
-            generateRandomNumber();
-            console.log(previousRandomNumbers);
+            let randomNumber = Math.floor(Math.random() * seperatedString.length);
             console.log(randomNumber);
             output.innerText = seperatedString[randomNumber];
         }
