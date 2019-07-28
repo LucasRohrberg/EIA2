@@ -24,7 +24,7 @@ function handleConnect(_e, _client) {
         db = _client.db(databaseName);
         let databaseLength = db.listCollections.length;
         let randomCollection = Math.floor(Math.random() * databaseLength - 1);
-        availableWords = db.collection(`${randomCollection}`);
+        availableWords = db.collection(`5`);
     }
 }
 function search(_callback) {

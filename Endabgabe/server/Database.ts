@@ -28,7 +28,7 @@ function handleConnect(_e: Mongo.MongoError, _client: Mongo.MongoClient): void {
         db = _client.db(databaseName);
         let databaseLength: number = db.listCollections.length;
         let randomCollection: number = Math.floor(Math.random() * databaseLength - 1);
-        availableWords = db.collection(`${randomCollection}`);
+        availableWords = db.collection(`5`);
     }
 }
 
