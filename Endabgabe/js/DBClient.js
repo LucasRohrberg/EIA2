@@ -57,7 +57,7 @@ var Endabgabe;
                 randomNumber = Math.floor(Math.random() * seperatedString.length);
                 if (previousRandomNumbers.length == seperatedString.length) {
                     alert("You used up every available word. Thanks for playing! <3");
-                    location.reload();
+                    //location.reload();
                 }
                 else if (previousRandomNumbers.includes(randomNumber)) {
                     generateRandomNumber();
